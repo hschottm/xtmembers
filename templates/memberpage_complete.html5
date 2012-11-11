@@ -1,0 +1,85 @@
+<div class="layout_full block <?php echo $this->class; ?>">
+<?php if (count($this->pages) > 1): ?>
+<div id="pagetabs">
+	<ul>
+<?php foreach ($this->pages as $page): ?>
+<?php $class = array(); ?>
+<?php if ($page["position"] == $this->activepage_position) array_push($class, "active"); ?>
+<?php if ($page["position"] == 1) array_push($class, "first"); ?>
+<?php if (($page["position"] == 1) || ($page["is_visible"])): ?>
+<?php $classstr = (strlen(trim(implode(" ", $class))) == 0) ? "" : trim(implode(" ", $class)); ?>
+		<li class="tab<?php echo " " . $classstr; ?>"><a href="<?php echo $page["href"]; ?>"><?php echo $page["title"]; ?></a></li>
+<?php endif; ?>
+<?php endforeach; ?>
+	</ul>
+<?php endif; ?>
+<?php if ((!array_key_exists("type", $this->activepage)) || (strcmp($this->activepage["type"], "memberpage") == 0)): ?>
+<?php if (strlen($this->avatar)): ?><img src="<?php echo $this->avatar; ?>" align="right" alt="<?php echo $this->firstname; ?> <?php echo $this->lastname; ?>" /><?php endif; ?>
+<div>
+<div class="name"><?php if (strlen($this->title)): ?><?php echo $this->title; ?> <?php endif; ?><?php echo $this->firstname; ?> <?php echo $this->lastname; ?></div>
+<?php if (strlen($this->department)): ?>
+<div class="department"><?php echo $this->department; ?></div>
+<?php endif; ?>
+<?php if (strlen($this->description)): ?>
+<div class="description"><?php echo $this->description; ?></div>
+<?php endif; ?>
+<table>
+<?php if (strlen($this->email)): ?>	
+	<tr>
+		<td class="left"><?php echo $this->lngEmail; ?>:</td>
+		<td class="right"><a href="mailto:<?php echo $this->email; ?>"><?php echo $this->email; ?></a></td>
+	</tr>
+<?php endif; ?>	
+<?php if (strlen($this->phone)): ?>	
+	<tr>
+		<td class="left"><?php echo $this->lngPhone; ?>:</td>
+		<td class="right"><?php echo $this->phone; ?></td>
+	</tr>
+<?php endif; ?>	
+<?php if (strlen($this->fax)): ?>	
+	<tr>
+		<td class="left"><?php echo $this->lngFax; ?>:</td>
+		<td class="right"><?php echo $this->fax; ?></td>
+	</tr>
+<?php endif; ?>	
+<?php if (strlen($this->website)): ?>	
+	<tr>
+		<td class="left"><?php echo $this->lngWebsite; ?>:</td>
+		<td class="right"><a href="<?php echo $this->website; ?>"><?php echo $this->website; ?></a></td>
+	</tr>
+<?php endif; ?>	
+<?php if (strlen($this->room)): ?>	
+	<tr>
+		<td class="left"><?php echo $this->lngRoom; ?>:</td>
+		<td class="right"><?php echo $this->room; ?></td>
+	</tr>
+<?php endif; ?>	
+<?php if (strlen($this->officehours)): ?>	
+	<tr>
+		<td class="left"><?php echo $this->lngOfficehours; ?>:</td>
+		<td class="right"><?php echo $this->officehours; ?></td>
+	</tr>
+<?php endif; ?>	
+<?php if (strlen(trim(implode("", $this->postaladdress)))): ?>
+	<tr>
+		<td class="left"><?php echo $this->lngPostaladdress; ?>:</td>
+		<td class="right"><?php echo implode("<br />", $this->postaladdress); ?></td>
+	</tr>
+<?php endif; ?>	
+<?php if (strlen($this->workscope)): ?>	
+	<tr>
+		<td class="left"><?php echo $this->lngWorkscope; ?>:</td>
+		<td class="right"><?php echo $this->workscope; ?></td>
+	</tr>
+<?php endif; ?>	
+</table>
+</div>
+<?php elseif ((array_key_exists("type", $this->activepage)) && (strcmp($this->activepage["type"], "essay") == 0)): ?>
+<?php echo $this->activepage["content"]; ?>
+<?php else: ?>
+<?php echo $this->memberpageContent; ?>
+<?php endif; ?>
+<?php if (count($this->pages) > 1): ?>
+</div>
+<?php endif; ?>
+</div>

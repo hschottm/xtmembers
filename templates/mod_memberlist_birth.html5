@@ -1,0 +1,142 @@
+<?php
+function datesortasc($a, $b)
+{
+	if (array_key_exists("dateOfBirth", $a[0]["raw"]) && array_key_exists("dateOfBirth", $b[0]["raw"]))
+	{
+		if ((is_numeric($a[0]["raw"]["dateOfBirth"])) && (is_numeric($b[0]["raw"]["dateOfBirth"])))
+		{
+			$aday = (int)date("d", $a[0]["raw"]["dateOfBirth"]);
+			$bday = (int)date("d", $b[0]["raw"]["dateOfBirth"]);
+			if ($aday == $bday) 
+			{
+				$ayear = (int)date("Y", $a[0]["raw"]["dateOfBirth"]);
+				$byear = (int)date("Y", $b[0]["raw"]["dateOfBirth"]);
+				if ($ayear == $byear) 
+				{
+					return 0;
+				}
+				return ($ayear < $byear) ? -1 : 1;
+			}
+			return ($aday < $bday) ? -1 : 1;
+		}
+	}
+	return 0;
+}
+function datesortdesc($a, $b)
+{
+	if (array_key_exists("dateOfBirth", $a[0]["raw"]) && array_key_exists("dateOfBirth", $b[0]["raw"]))
+	{
+		if ((is_numeric($a[0]["raw"]["dateOfBirth"])) && (is_numeric($b[0]["raw"]["dateOfBirth"])))
+		{
+			$aday = (int)date("d", $a[0]["raw"]["dateOfBirth"]);
+			$bday = (int)date("d", $b[0]["raw"]["dateOfBirth"]);
+			if ($aday == $bday) 
+			{
+				$ayear = (int)date("Y", $a[0]["raw"]["dateOfBirth"]);
+				$byear = (int)date("Y", $b[0]["raw"]["dateOfBirth"]);
+				if ($ayear == $byear) 
+				{
+					return 0;
+				}
+				return ($ayear < $byear) ? 1 : -1;
+			}
+			return ($aday < $bday) ? 1 : -1;
+		}
+	}
+	return 0;
+}
+?>
+<div class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+<?php if ($this->headline): ?>
+
+<<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
+<?php endif; ?>
+
+<?php if ($this->show_searchfield): ?>
+<div class="list_search">
+<form action="<?php echo $this->action; ?>" method="get">
+<div class="formbody">
+<input type="hidden" name="order_by" value="<?php echo $this->order_by; ?>" />
+<input type="hidden" name="sort" value="<?php echo $this->sort; ?>" />
+<input type="hidden" name="per_page" value="<?php echo $this->per_page; ?>" />
+<select name="search" class="select">
+<?php echo $this->search_fields; ?>
+</select>
+<input type="text" name="for" class="text" value="<?php echo $this->for; ?>" />
+<input type="submit" class="submit" value="<?php echo $this->search_label; ?>" />
+</div>
+</form>
+</div>
+<?php endif; ?>
+<?php if ($this->per_page): ?>
+
+<div class="list_per_page">
+<form action="<?php echo $this->action; ?>" method="get">
+<div class="formbody">
+<input type="hidden" name="order_by" value="<?php echo $this->order_by; ?>" />
+<input type="hidden" name="sort" value="<?php echo $this->sort; ?>" />
+<input type="hidden" name="search" value="<?php echo $this->search; ?>" />
+<input type="hidden" name="for" value="<?php echo $this->for; ?>" />
+<select name="per_page" class="select">
+  <option value="10"<?php if ($this->per_page == 10): ?> selected="selected"<?php endif; ?>>10</option>
+  <option value="20"<?php if ($this->per_page == 20): ?> selected="selected"<?php endif; ?>>20</option>
+  <option value="30"<?php if ($this->per_page == 30): ?> selected="selected"<?php endif; ?>>30</option>
+  <option value="50"<?php if ($this->per_page == 50): ?> selected="selected"<?php endif; ?>>50</option>
+  <option value="100"<?php if ($this->per_page == 100): ?> selected="selected"<?php endif; ?>>100</option>
+  <option value="250"<?php if ($this->per_page == 250): ?> selected="selected"<?php endif; ?>>250</option>
+  <option value="500"<?php if ($this->per_page == 500): ?> selected="selected"<?php endif; ?>>500</option>
+</select>
+<input type="submit" class="submit" value="<?php echo $this->per_page_label; ?>" />
+</div>
+</form>
+</div>
+<?php endif; ?>
+
+<table cellpadding="0" cellspacing="0" class="all_records" summary="">
+<thead>
+  <tr>
+<?php foreach ($this->thead as $col): ?>
+    <th class="head<?php echo $col['class']; ?>"><a href="<?php echo $col['href']; ?>" title="<?php echo $col['title']; ?>"><?php echo $col['link']; ?></a></th>
+<?php endforeach; ?>
+    <th class="head col_last">&nbsp;</th>
+  </tr>
+</thead>
+<tbody>
+<?php $month = date("m", time()); ?>
+<?php if (is_array($this->tbody)) 
+{
+	$arr =& $this->tbody;
+	uasort($arr, (strcmp($this->sort, "asc") == 0) ? "datesortasc" : "datesortdesc"); 
+	$this->tbody = $arr;
+}
+?>
+<?php $rowcount = 0; ?>
+<?php foreach ($this->tbody as $class=>$row): ?>
+<?php if (is_numeric($row[0]["raw"]["dateOfBirth"]) && strcmp($month, date("m", $row[0]["raw"]["dateOfBirth"])) == 0): ?>
+<?php $rowcount++; ?>
+  <tr class="<?php echo "row_" . $rowcount . " "; echo ($rowcount % 2 == 0) ? "even" : "odd" ?>">
+<?php foreach ($row as $col): ?>
+<?php if ($col['field'] == 'username'): ?>
+    <td class="body <?php echo $col['class']; ?>"><a href="<?php echo $this->url; ?>?id=<?php echo $col['id']; ?>"><?php echo $col['content']; ?></a></td>
+<?php else: ?>
+    <td class="body <?php echo $col['class']; ?>"><?php echo str_replace("\n", '<br />', $col['content']); ?></td>
+<?php endif; ?>
+<?php endforeach; ?>
+    <td class="body <?php echo $this->col_last; ?> col_last">
+<?php if (strlen($col['jumpTo'])): ?>
+			<a href="<?php echo $col['jumpTo']; ?>"><img src="system/modules/xtmembers/assets/details.gif" alt="" /></a>
+<?php else: ?>
+			<a href="<?php echo $this->url; ?>?show=<?php echo $col['id']; ?>"><img src="system/modules/xtmembers/assets/details.gif" alt="" /></a>
+<?php endif; ?>
+		</td>
+  </tr>
+<?php endif; ?>
+<?php endforeach; ?>
+<?php if ($rowcount == 0): ?>
+	<tr><td></td></tr>
+<?php endif; ?>
+</tbody>
+</table>
+<?php echo $this->pagination; ?>
+
+</div>

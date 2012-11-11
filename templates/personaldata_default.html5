@@ -1,0 +1,74 @@
+
+<!-- indexer::stop -->
+<div class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+<?php if ($this->headline): ?>
+<<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
+<?php endif; ?>
+<?php $pagecount = (!$this->page_editor) ? 1 : count($this->pages); ?>
+<?php if ($this->page_editor): ?>
+<div class="commands">
+	<form action="<?php echo $this->pageaction; ?>" method="post">
+		<input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}" />
+		<div class="commandlink"><input type="submit" class="submit" name="addPage" value="<?php echo $this->strAdd; ?>" />
+			<select name="pagetype">
+	<?php foreach ($this->pagetypes as $pagetype => $pagetitle): ?>
+				<option value="<?php echo $pagetype; ?>"><?php echo $pagetitle; ?></option>
+	<?php endforeach; ?>
+			</select>
+		</div>
+	<?php if ($this->activepage_position > 1): ?>
+		<div class="commandlink">
+			<input type="submit" class="submit" name="deletePage" value="<?php echo $this->strDeletePage; ?>" onclick="return confirm('<?php echo $this->confirmDeletePage; ?>');" />
+		</div>
+	<?php endif; ?>
+	</form>
+</div>
+<?php endif; ?>
+<?php if ($pagecount > 1): ?>
+<div id="pagetabs">
+	<ul>
+<?php foreach ($this->pages as $page): ?>
+<?php $class = array(); ?>
+<?php if ($page["position"] == $this->activepage_position) array_push($class, "active"); ?>
+<?php if ($page["position"] == 1) array_push($class, "first"); ?>
+<?php $classstr = (strlen(trim(implode(" ", $class))) == 0) ? "" : trim(implode(" ", $class)); ?>
+		<li class="tab<?php echo " " . $classstr; ?>"><a href="<?php echo $page["href"]; ?>"><?php echo $page["title"]; ?></a></li>
+<?php endforeach; ?>
+	</ul>
+<?php endif; ?>
+<form action="<?php echo $this->action; ?>" method="post" enctype="<?php echo $this->enctype; ?>">
+<input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}" />
+<?php if (($this->page_editor) && ($this->showPageHead)): ?>
+<?php if ($pagecount > 1): ?>
+<div class="tl_box">
+	<h3><label for="pageTitle"><?php echo $this->pageTitle; ?></label></h3>
+	<input type="text" id="pageTitle" name="pageTitle" value="<?php echo $this->pages[$this->activepage_position-1]["title"]; ?>" class="pageTitle" />
+</div>
+<?php endif; ?>
+<div class="tl_box">
+	<div class="tl_checkbox_single_container"><input type="checkbox" id="is_visible" name="is_visible" value="1" <?php if ($this->activePageArr["is_visible"]) echo "checked=\"checked\" "; ?> /> <label for="is_visible"><?php echo $this->textVisible[0]; ?></label></div>
+	<p class="tl_help"><?php echo $this->textVisible[1]; ?></p>
+</div>
+<?php endif; ?>
+<?php if ($this->activepage_position == 1): ?>
+<div class="submit_container">
+	<input type="submit" class="submit" name="saveContent" value="<?php echo $this->save; ?>" />
+</div>
+<?php elseif (strcmp($this->activePageArr["type"], "essay") == 0): ?>
+<div class="tl_box">
+	<h3><?php echo $this->content; ?></h3>
+	<textarea id="ctrl_text" name="content" rows="25" cols="100"><?php echo $this->activePageArr["content"]; ?></textarea>
+</div>
+<div class="submit_container">
+	<input type="submit" class="submit" name="saveContent" value="<?php echo $this->save; ?>" />
+</div>
+<?php else: ?>
+<?php echo $this->pageEditorContent; ?>
+<?php endif; ?>
+</form>
+<?php echo $this->memberdata; ?>
+<?php if ($pagecount > 1): ?>
+</div>
+<?php endif; ?>
+</div>
+<!-- indexer::continue -->
