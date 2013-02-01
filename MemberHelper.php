@@ -43,6 +43,141 @@ class MemberHelper extends Backend
 		{
 			$strWhere .= ((strlen($strWhere) == 0) ? "" : " AND ") . $objMemberlist->memberlist_where;
 		}
+		if (strlen($objMemberlist->show_searchfield == 2))
+		{
+			$this->Input->setGet('for', $objMemberlist->saved_for);
+			// Search query
+			if ($this->Input->get('search') && ($this->Input->get('for') != '' && $this->Input->get('for') != '*'))
+			{
+				$stop = false;
+				if ($GLOBALS['TL_DCA']['tl_member']['fields'][$this->Input->get('search')]['eval']['rgxp'] && strcmp($GLOBALS['TL_DCA']['tl_member']['fields'][$this->Input->get('search')]['eval']['rgxp'], 'date') == 0)
+				{
+					// date field handling
+					if (strlen($this->Input->get('for')) == 4)
+					{
+						switch (trim($this->Input->get('relation')))
+						{
+							case 'gt':
+								$start = mktime(23,59,59,12,31,$this->Input->get('for'));
+								$strWhere .= ((strlen($strWhere)) ? " AND (" : "(") . $this->Input->get('search') . " > ?)";
+								$arrValues[] = $start;
+								$stop = true;
+								break;
+							case 'geq':
+								$start = mktime(0,0,0,1,1,$this->Input->get('for'));
+								$strWhere .= ((strlen($strWhere)) ? " AND (" : "(") . $this->Input->get('search') . " >= ?)";
+								$arrValues[] = $start;
+								$stop = true;
+								break;
+							case 'lt':
+								$start = mktime(0,0,0,1,1,$this->Input->get('for'));
+								$strWhere .= ((strlen($strWhere)) ? " AND (" : "(") . $this->Input->get('search') . " < ?)";
+								$arrValues[] = $start;
+								$stop = true;
+								break;
+							case 'leq':
+								$start = mktime(23,59,59,12,31,$this->Input->get('for'));
+								$strWhere .= ((strlen($strWhere)) ? " AND (" : "(") . $this->Input->get('search') . " <= ?)";
+								$arrValues[] = $start;
+								$stop = true;
+								break;
+							case 'eq':
+								$start = mktime(0,0,0,1,1,$this->Input->get('for'));
+								$end = mktime(23,59,59,12,31,$this->Input->get('for'));
+								$strWhere .= ((strlen($strWhere)) ? " AND (" : "(") . $this->Input->get('search') . " >= ? AND " . $this->Input->get('search') . " <= ?)";
+								$arrValues[] = $start;
+								$arrValues[] = $end;
+								$stop = true;
+								break;
+							case 'neq':
+								$start = mktime(0,0,0,1,1,$this->Input->get('for'));
+								$end = mktime(23,59,59,12,31,$this->Input->get('for'));
+								$strWhere .= ((strlen($strWhere)) ? " AND (" : "(") . $this->Input->get('search') . " < ? OR " . $this->Input->get('search') . " > ?)";
+								$arrValues[] = $start;
+								$arrValues[] = $end;
+								$stop = true;
+								break;
+						}
+					}
+					else
+					{
+						switch (trim($this->Input->get('relation')))
+						{
+							case 'lt':
+								$rel = "<";
+								break;
+							case 'leq':
+								$rel = "<=";
+								break;
+							case 'eq':
+								$rel = "=";
+								break;
+							case 'neq':
+								$rel = "!=";
+								break;
+							case 'gt':
+								$rel = ">";
+								break;
+							case 'geq':
+								$rel = ">=";
+								break;
+						}
+						if ($rel)
+						{
+							try {
+								$start = new Date($this->Input->get('for'), $GLOBALS['TL_CONFIG']['dateFormat']);
+								$strWhere .= ((strlen($strWhere)) ? " AND (" : "(") . $this->Input->get('search') . " $rel ?)";
+								$arrValues[] = $start->timestamp;
+								$stop = true;
+							} catch (Exception $e) {
+							}
+						}
+					}
+				}
+				if (!$stop)
+				{
+					switch (trim($this->Input->get('relation')))
+					{
+						case 'lt':
+							$strWhere .= ((strlen($strWhere)) ? " AND " : "") . $this->Input->get('search') . " < ?";
+							$arrValues[] = $this->Input->get('for');
+							break;
+						case 'leq':
+							$strWhere .= ((strlen($strWhere)) ? " AND " : "") . $this->Input->get('search') . " <= ?";
+							$arrValues[] = $this->Input->get('for');
+							break;
+						case 'eq':
+							$strWhere .= ((strlen($strWhere)) ? " AND " : "") . $this->Input->get('search') . " = ?";
+							$arrValues[] = $this->Input->get('for');
+							break;
+						case 'neq':
+							$strWhere .= ((strlen($strWhere)) ? " AND " : "") . $this->Input->get('search') . " <> ?";
+							$arrValues[] = $this->Input->get('for');
+							break;
+						case 'gt':
+							$strWhere .= ((strlen($strWhere)) ? " AND " : "") . $this->Input->get('search') . " > ?";
+							$arrValues[] = $this->Input->get('for');
+							break;
+						case 'geq':
+							$strWhere .= ((strlen($strWhere)) ? " AND " : "") . $this->Input->get('search') . " >= ?";
+							$arrValues[] = $this->Input->get('for');
+							break;
+						case 'CONTAINS':
+							$strWhere .= ((strlen($strWhere)) ? " AND " : "") . $this->Input->get('search') . " REGEXP ?";
+							$arrValues[] = $this->Input->get('for');
+							break;
+						case 'checked':
+							$strWhere .= ((strlen($strWhere)) ? " AND " : "") . $this->Input->get('search') . " = ?";
+							$arrValues[] = '1';
+							break;
+						case 'unchecked':
+							$strWhere .= ((strlen($strWhere)) ? " AND " : "") . $this->Input->get('search') . " = ?";
+							$arrValues[] = '0';
+							break;
+					}
+				}
+			}
+		}
 	}
 
 }

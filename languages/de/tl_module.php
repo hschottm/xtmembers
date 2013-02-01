@@ -57,5 +57,8 @@ $GLOBALS['TL_LANG']['tl_module']['memberlist_where']['1'] = "Hier können Sie ei
 $GLOBALS['TL_LANG']['tl_module']['pageeditor_legend'] = "Seiteneditor";
 $GLOBALS['TL_LANG']['tl_module']['agreement_legend'] = "Nutzervereinbarung";
 $GLOBALS['TL_LANG']['tl_module']['groupselection_legend'] = "Gruppenauswahl";
+$GLOBALS['TL_LANG']['tl_module']['search_field']['0'] = "Keine Mitgliedersuche";
+$GLOBALS['TL_LANG']['tl_module']['search_field']['1'] = "Standard-Mitgliedersuche";
+$GLOBALS['TL_LANG']['tl_module']['search_field']['2'] = "Erweiterte Mitgliedersuche";
  
 ?>

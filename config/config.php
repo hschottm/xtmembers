@@ -55,6 +55,7 @@ $GLOBALS['FE_MOD']['user']['personalData'] = "ModulePersonalDataExtended";
 $GLOBALS['TL_HOOKS']['createNewUser'][] = array('CreatedMember', 'createNewUser');
 $GLOBALS['TL_HOOKS']['outputFrontendTemplate'][] = array('TinyMCEPatcher', 'outputFrontendTemplate');
 $GLOBALS['TL_HOOKS']['memberlistQuery'][] = array('MemberHelper', 'memberlistQuery');
+$GLOBALS['TL_HOOKS']['simpleAjax'][] = array('MemberlistAjaxHelper', 'generateHtmlOutputForMemberlistSearch');
 
 /**
  * Set the member URL parameter as url keyword

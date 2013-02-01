@@ -150,7 +150,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['page_editor'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['personaldata_page_editor'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'eval'                    => array('tl_class'=>'w50')
+	'eval'                    => array('tl_class'=>'w50 m12')
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['editable'] = array
@@ -166,7 +166,9 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['show_searchfield'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['memberlist_show_searchfield'],
 	'exclude'                 => true,
-	'inputType'               => 'checkbox',
+	'inputType'               => 'select',
+	'options'                 => array('0', '1', '2'),
+	'reference'               => &$GLOBALS['TL_LANG']['tl_module']['search_field'],
 	'eval'                    => array('tl_class'=>'w50')
 );
 
@@ -175,7 +177,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['show_member_name'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['show_member_name'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'eval'                    => array('tl_class'=>'w50')
+	'eval'                    => array('tl_class'=>'w50 m12')
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['memberlist_showdetailscolumn'] = array
@@ -184,7 +186,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['memberlist_showdetailscolumn'] = arra
 	'default'                 => '1',
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'eval'                    => array('tl_class'=>'w50')
+	'eval'                    => array('tl_class'=>'w50 m12')
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['memberlist_detailscolumn'] = array

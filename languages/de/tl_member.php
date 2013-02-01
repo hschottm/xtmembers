@@ -66,5 +66,14 @@ $GLOBALS['TL_LANG']['tl_member']['dateAdded']['0'] = "Hinzugefügt am";
 $GLOBALS['TL_LANG']['tl_member']['dateAdded']['1'] = "Datum, an dem das Mitglied hinzugefügt wurde";
 $GLOBALS['TL_LANG']['tl_member']['work_legend'] = "Arbeitsbeschreibungen";
 $GLOBALS['TL_LANG']['tl_member']['customer_legend'] = "Kundenbeziehungen";
- 
+$GLOBALS['TL_LANG']['tl_member']['rellt'] = 'Ist kleiner als';
+$GLOBALS['TL_LANG']['tl_member']['relleq'] = 'Ist kleiner gleich';
+$GLOBALS['TL_LANG']['tl_member']['releq'] = 'Ist gleich';
+$GLOBALS['TL_LANG']['tl_member']['relneq'] = 'Ist ungleich';
+$GLOBALS['TL_LANG']['tl_member']['relgt'] = 'Ist größer als';
+$GLOBALS['TL_LANG']['tl_member']['relgeq'] = 'Ist größer gleich';
+$GLOBALS['TL_LANG']['tl_member']['relcontains'] = 'Enthält';
+$GLOBALS['TL_LANG']['tl_member']['checked'] = 'Ausgewählt';
+$GLOBALS['TL_LANG']['tl_member']['unchecked'] = 'Nicht ausgewählt';
+
 ?>

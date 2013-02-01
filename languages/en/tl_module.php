@@ -59,6 +59,9 @@ $GLOBALS['TL_LANG']['tl_module']['about_person']      = 'About';
 $GLOBALS['TL_LANG']['tl_module']['confirmDeletePage']      = 'Are you sure that you want to delete the active page?';
 $GLOBALS['TL_LANG']['tl_module']['pagetype']['essay']      = 'Text';
 $GLOBALS['TL_LANG']['tl_module']['memberlist_where']       = array('Condition', 'Here you can enter a condition to filter the results (e.g. <em>locked=1</em> or <em>lastname!="Miller"</em>).');
+$GLOBALS['TL_LANG']['tl_module']['search_field']['0'] = "No member search";
+$GLOBALS['TL_LANG']['tl_module']['search_field']['1'] = "Default member search";
+$GLOBALS['TL_LANG']['tl_module']['search_field']['2'] = "Extended member search";
 
 /**
  * Legends

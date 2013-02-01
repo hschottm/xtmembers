@@ -57,6 +57,15 @@ $GLOBALS['TL_LANG']['tl_member']['agreement'] = 'User agreement';
 $GLOBALS['TL_LANG']['tl_member']['pageVisible'] = array('Page is visible', 'Please check if the page should be visible to everyone.');
 
 $GLOBALS['TL_LANG']['tl_member']['groupselection'] = array('Group', 'Please select a member group you want to join.');
+$GLOBALS['TL_LANG']['tl_member']['rellt'] = 'Is lower than';
+$GLOBALS['TL_LANG']['tl_member']['relleq'] = 'Is lower or equal than';
+$GLOBALS['TL_LANG']['tl_member']['releq'] = 'Is Equal';
+$GLOBALS['TL_LANG']['tl_member']['relneq'] = 'Is not Equal';
+$GLOBALS['TL_LANG']['tl_member']['relgt'] = 'Is greater than';
+$GLOBALS['TL_LANG']['tl_member']['relgeq'] = 'Is greater or equal than';
+$GLOBALS['TL_LANG']['tl_member']['relcontains'] = 'Contains';
+$GLOBALS['TL_LANG']['tl_member']['checked'] = 'Checked';
+$GLOBALS['TL_LANG']['tl_member']['unchecked'] = 'Not checked';
 
 /**
  * For registration mail. Add missing dateAdded field

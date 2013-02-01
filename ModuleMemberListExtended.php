@@ -140,6 +140,24 @@ class ModuleMemberListExtended extends ModuleMemberListExtendedSuperClass
 	 */
 	protected function listAllMembers()
 	{
+		if ($this->show_searchfield == 2)
+		{
+			if (strlen($this->Input->get('reset')))
+			{
+				$this->Input->setGet('for', '');
+				$this->Input->setGet('relation', '');
+				$this->Input->setGet('search', '');
+				global $objPage;
+				$this->redirect($this->generateFrontendUrl($objPage->row()));
+			}
+			else
+			{
+				$this->saved_for = $this->Input->get('for');
+				$this->Input->setGet('for', '');
+			}
+			$this->Template->relation = $this->Input->get('relation');
+			$this->Template->reset_label = specialchars($GLOBALS['TL_LANG']['MSC']['reset']);
+		}
 		parent::listAllMembers();
 		if ($this->memberlist_jumpTo)
 		{
