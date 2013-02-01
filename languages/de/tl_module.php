@@ -21,8 +21,6 @@ $GLOBALS['TL_LANG']['tl_module']['memberlist_template']['0'] = "Listenvorlage";
 $GLOBALS['TL_LANG']['tl_module']['memberlist_template']['1'] = "Bitte wählen Sie eine Listenvorlage. Sie können eigene <em>memberlist_</em>-Vorlagen im Ordner <em>templates</em> speichern.";
 $GLOBALS['TL_LANG']['tl_module']['memberlist_fields']['0'] = "Sichtbare Felder";
 $GLOBALS['TL_LANG']['tl_module']['memberlist_fields']['1'] = "Bitte wählen Sie mindestens ein Feld aus, das im Frontend sichtbar sein soll.";
-$GLOBALS['TL_LANG']['tl_module']['memberlist_sort']['0'] = "Initiale Sortierreihenfolge";
-$GLOBALS['TL_LANG']['tl_module']['memberlist_sort']['1'] = "Bitte wählen Sie eine initiale Sortierreihenfolge für die Mitgliederliste.";
 $GLOBALS['TL_LANG']['tl_module']['singlemember']['0'] = "Mitglied";
 $GLOBALS['TL_LANG']['tl_module']['singlemember']['1'] = "Bitte wählen Sie das Mitglied aus, dessen öffentliche Details angezeigt werden sollen.";
 $GLOBALS['TL_LANG']['tl_module']['memberlist_show_searchfield']['0'] = "Suchfeld anzeigen";
@@ -39,6 +37,10 @@ $GLOBALS['TL_LANG']['tl_module']['registration_agreement_text']['0'] = "Nutzerve
 $GLOBALS['TL_LANG']['tl_module']['registration_agreement_text']['1'] = "Geben Sie hier den Text für die Nutzervereinbarung ein. Dieser Text wird dann bei der Registrierung angezeigt.";
 $GLOBALS['TL_LANG']['tl_module']['registration_agreement_headline']['0'] = "Aufforderung zur Nutzervereinbarung";
 $GLOBALS['TL_LANG']['tl_module']['registration_agreement_headline']['1'] = "Geben Sie hier den Hinweistext ein, der dazu auffordern soll, die Nutzervereinbarung zu akzeptieren.";
+$GLOBALS['TL_LANG']['tl_module']['registration_allow_groupselection']['0'] = "Gruppenauswahl ermöglichen";
+$GLOBALS['TL_LANG']['tl_module']['registration_allow_groupselection']['1'] = "Wählen Sie aus, ob bei der Registrierung eine vorhandene Mitgliedsgruppe ausgewählt werden soll.";
+$GLOBALS['TL_LANG']['tl_module']['registration_groupselection_groups']['0'] = "Verfügbare Gruppen";
+$GLOBALS['TL_LANG']['tl_module']['registration_groupselection_groups']['1'] = "Wählen Sie die Gruppen, die während der Registrierung zur Auswahl stehen sollen.";
 $GLOBALS['TL_LANG']['tl_module']['personaldata_page_editor']['0'] = "Seiteneditor aktivieren";
 $GLOBALS['TL_LANG']['tl_module']['personaldata_page_editor']['1'] = "Wählen Sie aus, ob die Mitglieder ihre Mitgliedsseiten mit Hilfe eines Seiteneditors erweitern können.";
 $GLOBALS['TL_LANG']['tl_module']['reg_select_group'] = "-- Nutzergruppe auswählen --";
@@ -54,5 +56,6 @@ $GLOBALS['TL_LANG']['tl_module']['memberlist_where']['0'] = "Bedingung";
 $GLOBALS['TL_LANG']['tl_module']['memberlist_where']['1'] = "Hier können Sie eine Bedingung eingeben, um die Ergebnisse zu filtern (z.B. <em>locked=1</em> oder <em>lastname!=\"Müller\"</em>).";
 $GLOBALS['TL_LANG']['tl_module']['pageeditor_legend'] = "Seiteneditor";
 $GLOBALS['TL_LANG']['tl_module']['agreement_legend'] = "Nutzervereinbarung";
+$GLOBALS['TL_LANG']['tl_module']['groupselection_legend'] = "Gruppenauswahl";
  
 ?>

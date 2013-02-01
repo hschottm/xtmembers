@@ -32,7 +32,7 @@
  * http://tinymce.moxiecode.com for more information.
  */
 ?>
-<script type="text/javascript" src="<?php echo $this->base; ?>assets/tinymce/tiny_mce_gzip.js"></script>
+<script type="text/javascript" src="<?php echo $this->base; ?>plugins/tinyMCE/tiny_mce_gzip.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
 tinyMCE_GZ.init({

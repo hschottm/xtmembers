@@ -40,7 +40,8 @@ array_insert($GLOBALS['FE_MOD']['user'], 3, array
 
 $GLOBALS['xtmembers']['default_memberlist'] = $GLOBALS['FE_MOD']['user']['memberlist'];
 
-$GLOBALS['FE_MOD']['user']['singlemember'] = 'ModuleMemberDetails';
+$GLOBALS['FE_MOD']['user']['memberlist'] = 'ModuleMemberListExtended';
+$GLOBALS['FE_MOD']['user']['singlemember'] = 'ModuleMemberListExtended';
 $GLOBALS['FE_MOD']['user']['registration'] = 'ModuleRegistrationExtended';
 $GLOBALS['FE_MOD']['user']['personalData'] = "ModulePersonalDataExtended";
 
@@ -51,7 +52,9 @@ $GLOBALS['FE_MOD']['user']['personalData'] = "ModulePersonalDataExtended";
 /**
  * Register hook functions
  */
+$GLOBALS['TL_HOOKS']['createNewUser'][] = array('CreatedMember', 'createNewUser');
 $GLOBALS['TL_HOOKS']['outputFrontendTemplate'][] = array('TinyMCEPatcher', 'outputFrontendTemplate');
+$GLOBALS['TL_HOOKS']['memberlistQuery'][] = array('MemberHelper', 'memberlistQuery');
 
 /**
  * Set the member URL parameter as url keyword

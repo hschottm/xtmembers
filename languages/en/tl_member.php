@@ -56,6 +56,8 @@ $GLOBALS['TL_LANG']['tl_member']['name'] = "Name";
 $GLOBALS['TL_LANG']['tl_member']['agreement'] = 'User agreement';
 $GLOBALS['TL_LANG']['tl_member']['pageVisible'] = array('Page is visible', 'Please check if the page should be visible to everyone.');
 
+$GLOBALS['TL_LANG']['tl_member']['groupselection'] = array('Group', 'Please select a member group you want to join.');
+
 /**
  * For registration mail. Add missing dateAdded field
  */

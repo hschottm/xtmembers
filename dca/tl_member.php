@@ -1,11 +1,39 @@
-<?php
+<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * @copyright  Helmut Schottmüller
- * @author     Helmut Schottmüller <https://github.com/hschottm>
+ * TYPOlight webCMS
+ * Copyright (C) 2005 Leo Feyer
+ *
+ * This program is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation, either
+ * version 2.1 of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this program. If not, please visit the Free
+ * Software Foundation website at http://www.gnu.org/licenses/.
+ *
+ * PHP version 5
+ * @copyright  Helmut Schottmüller 2008
+ * @author     Helmut Schottmüller <helmut.schottmueller@aurealis.de>
+ * @package    Backend
  * @license    LGPL
+ * @filesource
  */
 
+/**
+ * Class tl_member_extended
+ *
+ * Provide miscellaneous methods that are used by the data configuration array.
+ * @copyright  Helmut Schottmüller 2008
+ * @author     Helmut Schottmüller <helmut.schottmueller@aurealis.de>
+ * @package    Controller
+ */
 class tl_member_extended extends tl_member
 {
 	public function getAgreementText()
@@ -95,11 +123,19 @@ if (array_key_exists("avatar", $GLOBALS['TL_DCA']['tl_member']['fields']))
 
 $GLOBALS['TL_DCA']['tl_member']['fields']['agreement'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_member']['agreement'],
+	'label'				=> &$GLOBALS['TL_LANG']['tl_member']['agreement'],
+	'exclude'			=> true,
+	'inputType'			=> 'agreement',
+	'eval'				=> array('agreement_headline' => (get_class($this) == 'ModuleRegistrationExtended') ? $this->agreement_headline : '', 'agreement_text' => (get_class($this) == 'ModuleRegistrationExtended') ? $this->agreement_text : '', 'feGroup'=>'agreement')
+);
+
+$GLOBALS['TL_DCA']['tl_member']['fields']['groupselection'] = array
+(
+	'label'				=> &$GLOBALS['TL_LANG']['tl_member']['groupselection'],
 	'exclude'                 => true,
-	'inputType'               => 'agreement',
-	'eval'                    => array('agreement_headline' => $this->agreement_headline, 'agreement_text' => $this->agreement_text, 'feGroup'=>'agreement'),
-	'sql'                     => "char(1) NOT NULL default ''"
+	'inputType'               => 'select',
+	'options'              => (get_class($this) == 'ModuleRegistrationExtended') ? $this->getGroupSelection() : array(),
+	'eval'				=> array('mandatory' => true, 'feGroup'=>'login', 'tl_class'=>'w50')
 );
 
 $GLOBALS['TL_DCA']['tl_member']['fields']['title'] = array
@@ -107,8 +143,7 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['title'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_member']['title'],
 	'search'                  => true,
 	'inputType'               => 'text',
-	'eval'                    => array('maxlength'=>50, 'feEditable' => true, 'feViewable'=>true, 'feGroup'=>'personal', 'tl_class'=>'w50', 'configure' => true),
-	'sql'                     => "varchar(50) NOT NULL default ''"
+	'eval'                    => array('maxlength'=>50, 'feEditable' => true, 'feViewable'=>true, 'feGroup'=>'personal', 'tl_class'=>'w50', 'configure' => true)
 );
 
 $GLOBALS['TL_DCA']['tl_member']['fields']['title_extended'] = array
@@ -116,8 +151,7 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['title_extended'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_member']['title_extended'],
 	'search'                  => true,
 	'inputType'               => 'text',
-	'eval'                    => array('maxlength'=>50, 'feEditable' => true, 'feViewable'=>true, 'feGroup'=>'personal', 'tl_class'=>'w50', 'configure' => true),
-	'sql'                     => "varchar(50) NOT NULL default ''"
+	'eval'                    => array('maxlength'=>50, 'feEditable' => true, 'feViewable'=>true, 'feGroup'=>'personal', 'tl_class'=>'w50', 'configure' => true)
 );
 
 $GLOBALS['TL_DCA']['tl_member']['fields']['salutation'] = array
@@ -125,8 +159,7 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['salutation'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_member']['salutation'],
 	'search'                  => true,
 	'inputType'               => 'text',
-	'eval'                    => array('maxlength'=>40, 'feEditable' => true, 'feViewable'=>true, 'feGroup'=>'personal', 'tl_class'=>'w50', 'configure' => true),
-	'sql'                     => "varchar(40) NOT NULL default ''"
+	'eval'                    => array('maxlength'=>40, 'feEditable' => true, 'feViewable'=>true, 'feGroup'=>'personal', 'tl_class'=>'w50', 'configure' => true)
 );
 
 $GLOBALS['TL_DCA']['tl_member']['fields']['description'] = array
@@ -134,8 +167,7 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['description'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_member']['description'],
 	'search'                  => true,
 	'inputType'               => 'textarea',
-	'eval'                    => array('allowHtml'=>true, 'rte' => 'tinyMCE', 'cols' => 40, 'style'=>'height:80px;width:250px;', 'feEditable' => true, 'feViewable'=>true, 'feGroup'=>'personal', 'tl_class'=>'long', 'configure' => true),
-	'sql'                     => "text NULL"
+	'eval'                    => array('allowHtml'=>true, 'rte' => 'tinyMCE', 'cols' => 40, 'style'=>'height:80px;width:250px;', 'feEditable' => true, 'feViewable'=>true, 'feGroup'=>'personal', 'tl_class'=>'long', 'configure' => true)
 );
 
 $GLOBALS['TL_DCA']['tl_member']['fields']['notes'] = array
@@ -143,8 +175,7 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['notes'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_member']['notes'],
 	'search'                  => true,
 	'inputType'               => 'textarea',
-	'eval'                    => array('allowHtml'=>true, 'rte' => 'tinyMCE', 'cols' => 40, 'style'=>'height:80px;width:250px;', 'feEditable' => true, 'feViewable'=>true, 'feGroup'=>'customer', 'tl_class'=>'long', 'configure' => true),
-	'sql'                     => "text NULL"
+	'eval'                    => array('allowHtml'=>true, 'rte' => 'tinyMCE', 'cols' => 40, 'style'=>'height:80px;width:250px;', 'feEditable' => true, 'feViewable'=>true, 'feGroup'=>'customer', 'tl_class'=>'long', 'configure' => true)
 );
 
 $GLOBALS['TL_DCA']['tl_member']['fields']['address2'] = array
@@ -152,8 +183,7 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['address2'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_member']['address2'],
 	'search'                  => true,
 	'inputType'               => 'text',
-	'eval'                    => array('maxlength'=>150, 'feEditable' => true, 'feViewable'=>true, 'feGroup'=>'address', 'tl_class'=>'w50', 'configure' => true),
-	'sql'                     => "varchar(150) NOT NULL default ''"
+	'eval'                    => array('maxlength'=>150, 'feEditable' => true, 'feViewable'=>true, 'feGroup'=>'address', 'tl_class'=>'w50', 'configure' => true)
 );
 
 $GLOBALS['TL_DCA']['tl_member']['fields']['room'] = array
@@ -161,8 +191,7 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['room'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_member']['room'],
 	'search'                  => true,
 	'inputType'               => 'text',
-	'eval'                    => array('maxlength'=>14, 'feEditable' => true, 'feViewable'=>true, 'feGroup'=>'address', 'tl_class'=>'w50', 'configure' => true),
-	'sql'                     => "varchar(14) NOT NULL default ''"
+	'eval'                    => array('maxlength'=>14, 'feEditable' => true, 'feViewable'=>true, 'feGroup'=>'address', 'tl_class'=>'w50', 'configure' => true)
 );
 
 $GLOBALS['TL_DCA']['tl_member']['fields']['building'] = array
@@ -170,8 +199,7 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['building'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_member']['building'],
 	'search'                  => true,
 	'inputType'               => 'text',
-	'eval'                    => array('maxlength'=>50, 'feEditable' => true, 'feViewable'=>true, 'feGroup'=>'address', 'tl_class'=>'w50', 'configure' => true),
-	'sql'                     => "varchar(50) NOT NULL default ''"
+	'eval'                    => array('maxlength'=>50, 'feEditable' => true, 'feViewable'=>true, 'feGroup'=>'address', 'tl_class'=>'w50', 'configure' => true)
 );
 
 $GLOBALS['TL_DCA']['tl_member']['fields']['department'] = array
@@ -179,8 +207,7 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['department'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_member']['department'],
 	'search'                  => true,
 	'inputType'               => 'text',
-	'eval'                    => array('maxlength'=>150, 'feEditable' => true, 'feViewable'=>true, 'feGroup'=>'address', 'tl_class'=>'w50', 'configure' => true),
-	'sql'                     => "varchar(150) NOT NULL default ''"
+	'eval'                    => array('maxlength'=>150, 'feEditable' => true, 'feViewable'=>true, 'feGroup'=>'address', 'tl_class'=>'w50', 'configure' => true)
 );
 
 $GLOBALS['TL_DCA']['tl_member']['fields']['officehours'] = array
@@ -188,8 +215,7 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['officehours'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_member']['officehours'],
 	'search'                  => true,
 	'inputType'               => 'textarea',
-	'eval'                    => array('allowHtml'=>true, 'rte' => 'tinyMCE', 'cols' => 40, 'style'=>'height:80px;width:250px;', 'feEditable' => true, 'feViewable'=>true, 'feGroup'=>'personal', 'tl_class'=>'clr long', 'configure' => true),
-	'sql'                     => "text NULL"
+	'eval'                    => array('allowHtml'=>true, 'rte' => 'tinyMCE', 'cols' => 40, 'style'=>'height:80px;width:250px;', 'feEditable' => true, 'feViewable'=>true, 'feGroup'=>'personal', 'tl_class'=>'clr long', 'configure' => true)
 );
 
 $GLOBALS['TL_DCA']['tl_member']['fields']['joined'] = array
@@ -197,8 +223,7 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['joined'] = array
 	'exclude'                 => true,
 	'label'                   => &$GLOBALS['TL_LANG']['tl_member']['joined'],
 	'inputType'               => 'text',
-	'eval'                    => array('maxlength'=>10, 'rgxp'=>'date', 'datepicker'=>$this->getDatePickerString(), 'feEditable' => true, 'tl_class'=>'w50 wizard', 'configure' => true),
-	'sql'                     => "varchar(10) NOT NULL default ''"
+	'eval'                    => array('maxlength'=>10, 'rgxp'=>'date', 'datepicker'=>$this->getDatePickerString(), 'feEditable' => true, 'tl_class'=>'w50 wizard', 'configure' => true)
 );
 
 $GLOBALS['TL_DCA']['tl_member']['fields']['resigned'] = array
@@ -206,8 +231,7 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['resigned'] = array
 	'exclude'                 => true,
 	'label'                   => &$GLOBALS['TL_LANG']['tl_member']['resigned'],
 	'inputType'               => 'text',
-	'eval'                    => array('maxlength'=>10, 'rgxp'=>'date', 'datepicker'=>$this->getDatePickerString(), 'feEditable' => true, 'tl_class'=>'w50 wizard', 'configure' => true),
-	'sql'                     => "varchar(10) NOT NULL default ''"
+	'eval'                    => array('maxlength'=>10, 'rgxp'=>'date', 'datepicker'=>$this->getDatePickerString(), 'feEditable' => true, 'tl_class'=>'w50 wizard', 'configure' => true)
 );
 
 $GLOBALS['TL_DCA']['tl_member']['fields']['workscope'] = array
@@ -215,8 +239,7 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['workscope'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_member']['workscope'],
 	'search'                  => true,
 	'inputType'               => 'textarea',
-	'eval'                    => array('allowHtml'=>true, 'rte' => 'tinyMCE', 'cols' => 40, 'style'=>'height:80px;width:250px;', 'feEditable' => true, 'feViewable'=>true, 'feGroup'=>'personal', 'tl_class'=>'long', 'configure' => true),
-	'sql'                     => "text NULL"
+	'eval'                    => array('allowHtml'=>true, 'rte' => 'tinyMCE', 'cols' => 40, 'style'=>'height:80px;width:250px;', 'feEditable' => true, 'feViewable'=>true, 'feGroup'=>'personal', 'tl_class'=>'long', 'configure' => true)
 );
 
 $GLOBALS['TL_DCA']['tl_member']['fields']['campaign'] = array
@@ -224,8 +247,7 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['campaign'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_member']['campaign'],
 	'search'                  => true,
 	'inputType'               => 'text',
-	'eval'                    => array('maxlength'=>150, 'feEditable' => true, 'feViewable'=>true, 'feGroup'=>'customer', 'tl_class'=>'w50', 'configure' => true),
-	'sql'                     => "varchar(150) NOT NULL default ''"
+	'eval'                    => array('maxlength'=>150, 'feEditable' => true, 'feViewable'=>true, 'feGroup'=>'customer', 'tl_class'=>'w50', 'configure' => true)
 );
 
 $GLOBALS['TL_DCA']['tl_member']['fields']['business_connection'] = array
@@ -233,8 +255,7 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['business_connection'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_member']['business_connection'],
 	'search'                  => true,
 	'inputType'               => 'text',
-	'eval'                    => array('maxlength'=>150, 'feEditable' => true, 'feViewable'=>true, 'feGroup'=>'customer', 'tl_class'=>'w50', 'configure' => true),
-	'sql'                     => "varchar(150) NOT NULL default ''"
+	'eval'                    => array('maxlength'=>150, 'feEditable' => true, 'feViewable'=>true, 'feGroup'=>'customer', 'tl_class'=>'w50', 'configure' => true)
 );
 
 $GLOBALS['TL_DCA']['tl_member']['fields']['branch'] = array
@@ -242,8 +263,7 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['branch'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_member']['branch'],
 	'search'                  => true,
 	'inputType'               => 'text',
-	'eval'                    => array('maxlength'=>100, 'feEditable' => true, 'feViewable'=>true, 'feGroup'=>'customer', 'tl_class'=>'w50', 'configure' => true),
-	'sql'                     => "varchar(100) NOT NULL default ''"
+	'eval'                    => array('maxlength'=>100, 'feEditable' => true, 'feViewable'=>true, 'feGroup'=>'customer', 'tl_class'=>'w50', 'configure' => true)
 );
 
 $GLOBALS['TL_DCA']['tl_member']['fields']['jobtitle'] = array
@@ -251,8 +271,7 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['jobtitle'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_member']['jobtitle'],
 	'search'                  => true,
 	'inputType'               => 'text',
-	'eval'                    => array('maxlength'=>50, 'feEditable' => true, 'feViewable'=>true, 'feGroup'=>'customer', 'tl_class'=>'w50', 'configure' => true),
-	'sql'                     => "varchar(50) NOT NULL default ''"
+	'eval'                    => array('maxlength'=>50, 'feEditable' => true, 'feViewable'=>true, 'feGroup'=>'customer', 'tl_class'=>'w50', 'configure' => true)
 );
 
 $GLOBALS['TL_DCA']['tl_member']['fields']['jobtitle_bc'] = array
@@ -260,13 +279,7 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['jobtitle_bc'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_member']['jobtitle_bc'],
 	'search'                  => true,
 	'inputType'               => 'text',
-	'eval'                    => array('maxlength'=>50, 'feEditable' => true, 'feViewable'=>true, 'feGroup'=>'customer', 'tl_class'=>'w50', 'configure' => true),
-	'sql'                     => "varchar(50) NOT NULL default ''"
-);
-
-$GLOBALS['TL_DCA']['tl_member']['fields']['member_pages'] = array
-(
-	'sql'                     => "blob NULL"
+	'eval'                    => array('maxlength'=>50, 'feEditable' => true, 'feViewable'=>true, 'feGroup'=>'customer', 'tl_class'=>'w50', 'configure' => true)
 );
 
 $GLOBALS['TL_DCA']['tl_member']['fields']['publicFields']['options_callback'] = array('tl_member_extended', 'getViewableMemberProperties');

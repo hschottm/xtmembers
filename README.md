@@ -1,4 +1,0 @@
-xtmembers
-=========
-
-Contao extension xtmembers

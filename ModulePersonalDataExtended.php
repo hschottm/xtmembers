@@ -1,12 +1,31 @@
-<?php
+<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * @copyright  Helmut Schottmüller
- * @author     Helmut Schottmüller <https://github.com/hschottm>
+ * TYPOlight webCMS
+ * Copyright (C) 2005 Leo Feyer
+ *
+ * This program is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation, either
+ * version 2.1 of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this program. If not, please visit the Free
+ * Software Foundation website at http://www.gnu.org/licenses/.
+ *
+ * PHP version 5
+ * @copyright  Helmut Schottmüller 2008
+ * @author     Helmut Schottmüller <helmut.schottmueller@aurealis.de>
+ * @package    memberextensions
  * @license    LGPL
+ * @filesource
  */
 
-namespace Contao;
 
 /**
  * Class ModulePersonalDataExtended
@@ -99,7 +118,7 @@ class ModulePersonalDataExtended extends ModulePersonalData
 		$arrData['position'] = $objFrontendPage->numRows + 1;
 		$arrData['content'] = '';
 		$arrData['is_visible'] = '';
-		$arrData['pagetype'] = \Input::post('pagetype');
+		$arrData['pagetype'] = $this->Input->post('pagetype');
 		$objFrontendPage = $this->Database->prepare("INSERT INTO tl_member_pages %s")->set($arrData)->execute();
 		$insertId = $objFrontendPage->insertId;
 		array_push($pages, $insertId);
@@ -130,8 +149,8 @@ class ModulePersonalDataExtended extends ModulePersonalData
 
 			$this->createDefaultPage();
 
-			$activepage = (strlen(\Input::get("activepage"))) ? \Input::get("activepage") : 1;
-			if (strlen(\Input::post("addPage")))
+			$activepage = (strlen($this->Input->get("activepage"))) ? $this->Input->get("activepage") : 1;
+			if (strlen($this->Input->post("addPage")))
 			{
 				// add a new page
 				$this->addPage();
@@ -139,18 +158,18 @@ class ModulePersonalDataExtended extends ModulePersonalData
 				$this->redirect($this->addToUrl("activepage=$activepage"));
 			}
 
-			if (strlen(\Input::post("deletePage")))
+			if (strlen($this->Input->post("deletePage")))
 			{
 				// delete a page
-				$this->deletePage(\Input::get("activepage"));
+				$this->deletePage($this->Input->get("activepage"));
 				$page = $activepage-1;
 				$this->redirect($this->addToUrl("activepage=" . $page));
 			}
 
-			if (strlen(\Input::post("saveContent")) || strlen(\Input::post('FORM_SUBMIT')))
+			if (strlen($this->Input->post("saveContent")) || strlen($this->Input->post('FORM_SUBMIT')))
 			{
 				$this->Database->prepare("UPDATE tl_member_pages SET title=?, content=?, is_visible=? WHERE position=? AND id IN (" . implode(",", deserialize($this->User->member_pages, TRUE)). ")")
-					->execute(\Input::post("pageTitle"), \Input::postHtml("content", TRUE), \Input::post("is_visible"), $activepage);
+					->execute($this->Input->post("pageTitle"), $this->Input->postHtml("content", TRUE), $this->Input->post("is_visible"), $activepage);
 			}
 
 			// Set template
@@ -164,7 +183,7 @@ class ModulePersonalDataExtended extends ModulePersonalData
 			$hasUpload = false;
 			$this->Template->fields = '';
 
-			$this->Template->pageaction = ampersand(\Environment::get('request'), ENCODE_AMPERSANDS);
+			$this->Template->pageaction = ampersand($this->Environment->request, ENCODE_AMPERSANDS);
 			$pages = array();
 			if (is_array($this->User->member_pages) || strlen($this->User->member_pages))
 			{
@@ -219,7 +238,7 @@ class ModulePersonalDataExtended extends ModulePersonalData
 
 			$this->Template->formId = 'tl_member_' . $this->id;
 			$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['saveData']);
-			$this->Template->action = ampersand(\Environment::get('request'), ENCODE_AMPERSANDS);
+			$this->Template->action = ampersand($this->Environment->request, ENCODE_AMPERSANDS);
 			$this->Template->enctype = $hasUpload ? 'multipart/form-data' : 'application/x-www-form-urlencoded';
 			$this->Template->rowLast = 'row_' . count($this->editable) . ((($i % 2) == 0) ? ' odd' : ' even');
 		}

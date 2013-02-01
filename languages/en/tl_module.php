@@ -33,7 +33,6 @@
 $GLOBALS['TL_LANG']['tl_module']['member_template']      = array('Page layout', 'Please choose a page layout. You can add custom <em>memberpage_</em> layouts to folder <em>templates</em>.');
 $GLOBALS['TL_LANG']['tl_module']['memberlist_template']      = array('List layout', 'Please choose a list layout. You can add custom <em>memberlist_</em> layouts to folder <em>templates</em>.');
 $GLOBALS['TL_LANG']['tl_module']['memberlist_fields']      = array('Visible fields', 'Please select one or more fields to be visible in the front end.');
-$GLOBALS['TL_LANG']['tl_module']['memberlist_sort']      = array('Initial sort order', 'Please select the initial sort order of the memberlist.');
 $GLOBALS['TL_LANG']['tl_module']['singlemember']      = array('Member', 'Please select the member whose details should be shown.');
 $GLOBALS['TL_LANG']['tl_module']['memberlist_show_searchfield']      = array('Show search field', 'Please choose if a member search field should be shown on top of the member list.');
 $GLOBALS['TL_LANG']['tl_module']['show_member_name']      = array('Show member name in title', 'Show the name of a member in the page title if the member details are selected.');
@@ -43,6 +42,9 @@ $GLOBALS['TL_LANG']['tl_module']['memberlist_detailscolumn']      = array('Detai
 $GLOBALS['TL_LANG']['tl_module']['registration_show_agreement']      = array('Show user agreement', 'Please choose if a user agreement should be shown during the registration process. The registration can be completed only if the user agreement will be accepted.');
 $GLOBALS['TL_LANG']['tl_module']['registration_agreement_text']      = array('User agreement', 'Please enter the user agreement. The user agreement will be shown during the registration process.');
 $GLOBALS['TL_LANG']['tl_module']['registration_agreement_headline']      = array('User agreement request', 'Please enter the request text to accept the user agreement. This text will be shown near a checkbox to accept the user agreement during the registration process.');
+
+$GLOBALS['TL_LANG']['tl_module']['registration_allow_groupselection']      = array('Allow group selection', 'Please choose if the applicant has to choose an existing role to apply it.');
+$GLOBALS['TL_LANG']['tl_module']['registration_groupselection_groups']      = array('Available groups', 'Please select the groups which should be available for selection during the registration process.');
 
 $GLOBALS['TL_LANG']['tl_module']['personaldata_page_editor']      = array('Activate page editor', 'Please choose if members should be able to extend their personal pages with a page editor.');
 
@@ -63,5 +65,6 @@ $GLOBALS['TL_LANG']['tl_module']['memberlist_where']       = array('Condition', 
  */
 $GLOBALS['TL_LANG']['tl_module']['pageeditor_legend']     = 'Page Editor';
 $GLOBALS['TL_LANG']['tl_module']['agreement_legend']     = 'User Agreement';
+$GLOBALS['TL_LANG']['tl_module']['groupselection_legend']     = 'Group Selection';
 
 ?>
