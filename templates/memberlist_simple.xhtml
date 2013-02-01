@@ -143,7 +143,7 @@
 <?php if (strlen($col['jumpTo']) && (strcmp($this->detailsColumn, $col['field']) == 0)): ?>
 		<td class="body <?php echo $col['class']; ?>"><a href="<?php echo $col['jumpTo']; ?>"><?php echo $col['content']; ?></a></td>
 <?php elseif (strcmp($this->detailsColumn, $col['field']) == 0): ?>
-		<td class="body <?php echo $col['class']; ?>"><a href="<?php echo $this->url; ?>?show=<?php echo $col['id']; ?>"><?php echo $col['content']; ?></a></td>
+		<td class="body <?php echo $col['class']; ?>"><a href="<?php echo $this->url; ?>show=<?php echo $col['id']; ?>"><?php echo $col['content']; ?></a></td>
 <?php else: ?>		
 		<td class="body <?php echo $col['class']; ?>"><?php echo $col['content']; ?></td>
 <?php endif; ?>
@@ -153,7 +153,7 @@
 <?php if (strlen($col['jumpTo'])): ?>
 			<a href="<?php echo $col['jumpTo']; ?>"><img src="system/modules/xtmembers/html/details.gif" alt="" /></a>
 <?php else: ?>
-			<a href="<?php echo $this->url; ?>?show=<?php echo $col['id']; ?>"><img src="system/modules/xtmembers/html/details.gif" alt="" /></a>
+			<a href="<?php echo $this->url; ?>show=<?php echo $col['id']; ?>"><img src="system/modules/xtmembers/html/details.gif" alt="" /></a>
 <?php endif; ?>
 		</td>
 <?php endif; ?>		

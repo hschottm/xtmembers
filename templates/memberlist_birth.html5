@@ -195,7 +195,7 @@ function datesortdesc($a, $b)
   <tr class="<?php echo "row_" . $rowcount . " "; echo ($rowcount % 2 == 0) ? "even" : "odd" ?>">
 <?php foreach ($row as $col): ?>
 <?php if ($col['field'] == 'username'): ?>
-    <td class="body <?php echo $col['class']; ?>"><a href="<?php echo $this->url; ?>?id=<?php echo $col['id']; ?>"><?php echo $col['content']; ?></a></td>
+    <td class="body <?php echo $col['class']; ?>"><a href="<?php echo $this->url; ?>show=<?php echo $col['id']; ?>"><?php echo $col['content']; ?></a></td>
 <?php else: ?>
     <td class="body <?php echo $col['class']; ?>"><?php echo str_replace("\n", '<br />', $col['content']); ?></td>
 <?php endif; ?>
@@ -204,7 +204,7 @@ function datesortdesc($a, $b)
 <?php if (strlen($col['jumpTo'])): ?>
 			<a href="<?php echo $col['jumpTo']; ?>"><img src="system/modules/xtmembers/html/details.gif" alt="" /></a>
 <?php else: ?>
-			<a href="<?php echo $this->url; ?>?show=<?php echo $col['id']; ?>"><img src="system/modules/xtmembers/html/details.gif" alt="" /></a>
+			<a href="<?php echo $this->url; ?>show=<?php echo $col['id']; ?>"><img src="system/modules/xtmembers/html/details.gif" alt="" /></a>
 <?php endif; ?>
 		</td>
   </tr>
