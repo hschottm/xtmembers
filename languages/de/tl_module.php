@@ -60,6 +60,7 @@ $GLOBALS['TL_LANG']['tl_module']['groupselection_legend'] = "Gruppenauswahl";
 $GLOBALS['TL_LANG']['tl_module']['search_field']['0'] = "Keine Mitgliedersuche";
 $GLOBALS['TL_LANG']['tl_module']['search_field']['1'] = "Standard-Mitgliedersuche";
 $GLOBALS['TL_LANG']['tl_module']['search_field']['2'] = "Erweiterte Mitgliedersuche";
+$GLOBALS['TL_LANG']['tl_module']['memberlist_filtercount']       = array('Anzahl der Filter', 'Legen Sie die Anzahl der Drop-Down-Felder fest, mit denen Filter gesetzt werden können. Überschreitet die Anzahl, die Menge der verfügbaren Filterausdrücke, so werden keine weiteren Filter erzeugt.');
 $GLOBALS['TL_LANG']['tl_module']['memberlist_filters']      = array('Filterbedingungen', 'Sie können hier eine Liste von SQL WHERE Filterbedingungen angeben (z.B. <em>locked=1</em> oder <em>lastname!="Müller"</em>) und mit einem Namen versehen. Diese Bedingungen werden dann zur Filterung der Mitgliederliste angeboten.');
 $GLOBALS['TL_LANG']['tl_module']['memberlist_filter_name']      = 'Filterausdruck';
 $GLOBALS['TL_LANG']['tl_module']['memberlist_filter_description']      = 'Name';

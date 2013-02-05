@@ -59,13 +59,14 @@ function datesortdesc($a, $b)
 <input type="hidden" name="order_by" value="<?php echo $this->order_by; ?>" />
 <input type="hidden" name="sort" value="<?php echo $this->sort; ?>" />
 <input type="hidden" name="per_page" value="<?php echo $this->per_page; ?>" />
-<input type="hidden" name="filter" value="<?php echo $this->filter; ?>" />
-<select name="filter" id="ctrl_filter" class="select">
+<?php for ($i = 0; $i < $this->filtercount; $i++): ?>
+<select name="f<?php echo $i; ?>" id="ctrl_filter_<?php echo $i; ?>" class="select">
 	<option value="-1"><?php echo $this->select_filter; ?></option>
 <?php foreach ($this->filters as $idx => $filter): ?>
-	<option <?php if (strlen($this->filter) && ($this->filter == $idx)) echo ' selected="selected"'; ?>value="<?php echo $filter[0]; ?>"><?php echo $filter[1]; ?></option>
+	<option <?php if (strlen($this->filter[$i]) && ($this->filter[$i] == $idx)) echo ' selected="selected"'; ?>value="<?php echo $filter[0]; ?>"><?php echo $filter[1]; ?></option>
 <?php endforeach; ?>	
 </select>
+<?php endfor; ?>
 <input type="submit" class="submit" value="<?php echo $this->filter_label; ?>" />
 </div>
 </form>
@@ -78,6 +79,9 @@ function datesortdesc($a, $b)
 <input type="hidden" name="order_by" value="<?php echo $this->order_by; ?>" />
 <input type="hidden" name="sort" value="<?php echo $this->sort; ?>" />
 <input type="hidden" name="per_page" value="<?php echo $this->per_page; ?>" />
+<?php for ($i = 0; $i < $this->filtercount; $i++): ?>
+<input type="hidden" name="f<?php echo $i; ?>" value="<?php echo $this->filter[$i]; ?>" />
+<?php endfor; ?>
 <select name="search" class="select">
 <?php echo $this->search_fields; ?>
 </select>
@@ -173,6 +177,9 @@ function datesortdesc($a, $b)
 <input type="hidden" name="order_by" value="<?php echo $this->order_by; ?>" />
 <input type="hidden" name="sort" value="<?php echo $this->sort; ?>" />
 <input type="hidden" name="search" value="<?php echo $this->search; ?>" />
+<?php for ($i = 0; $i < $this->filtercount; $i++): ?>
+<input type="hidden" name="f<?php echo $i; ?>" value="<?php echo $this->filter[$i]; ?>" />
+<?php endfor; ?>
 <input type="hidden" name="for" value="<?php echo $this->for; ?>" />
 <select name="per_page" class="select">
   <option value="10"<?php if ($this->per_page == 10): ?> selected="selected"<?php endif; ?>>10</option>

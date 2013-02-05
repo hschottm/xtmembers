@@ -63,6 +63,7 @@ CREATE TABLE `tl_module` (
   `memberlist_detailscolumn` varchar(255) NOT NULL default 'username',
   `memberlist_where` varchar(255) NOT NULL default '',
   `memberlist_filters` blob NULL,
+  `memberlist_filtercount` smallint(5) unsigned NOT NULL default '1',
   `singlemember` int(10) unsigned NOT NULL default '0',
   `show_agreement` char(1) NOT NULL default '',
   `allow_groupselection` char(1) NOT NULL default '',

@@ -172,7 +172,17 @@ class ModuleMemberListExtended extends ModuleMemberListExtendedSuperClass
 				}
 			}
 		}
-		$this->Template->filter = $this->Input->get('filter');
+		if ($this->memberlist_filtercount > count($where_filters)) $this->memberlist_filtercount = count($where_filters);
+		$filtervalues = array();
+		if ($this->memberlist_filtercount > 0)
+		{
+			for ($i = 0; $i < $this->memberlist_filtercount; $i++)
+			{
+				array_push($filtervalues, $this->Input->get("f$i"));
+			}
+		}
+		$this->Template->filtercount = $this->memberlist_filtercount;
+		$this->Template->filter = $filtervalues;
 		$this->Template->filters = $where_filters;
 		$this->Template->select_filter = $GLOBALS['TL_LANG']['MSC']['select_filter'];
 		$this->Template->filter_label = $GLOBALS['TL_LANG']['MSC']['show_filter'];
