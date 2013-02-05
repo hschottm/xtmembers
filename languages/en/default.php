@@ -29,5 +29,7 @@
 
 $GLOBALS['TL_LANG']['ERR']['agreement']    = 'Please accept the user agreement!';
 $GLOBALS['TL_LANG']['MSC']['reset'] = "Reset";
+$GLOBALS['TL_LANG']['MSC']['show_filter'] = "Show";
+$GLOBALS['TL_LANG']['MSC']['select_filter'] = "Please select...";
 
 ?>

@@ -158,6 +158,24 @@ class ModuleMemberListExtended extends ModuleMemberListExtendedSuperClass
 			$this->Template->relation = $this->Input->get('relation');
 			$this->Template->reset_label = specialchars($GLOBALS['TL_LANG']['MSC']['reset']);
 		}
+		$where_filters = array();
+		if (strlen($this->memberlist_filters))
+		{
+			$c = 0;
+			$filters = deserialize($this->memberlist_filters, true);
+			foreach ($filters as $filterarray)
+			{
+				if (is_array($filterarray) && count($filterarray) == 2 && strlen($filterarray[0]) && strlen($filterarray[1]))
+				{
+					array_push($where_filters, array($c, $filterarray[1]));
+					$c++;
+				}
+			}
+		}
+		$this->Template->filter = $this->Input->get('filter');
+		$this->Template->filters = $where_filters;
+		$this->Template->select_filter = $GLOBALS['TL_LANG']['MSC']['select_filter'];
+		$this->Template->filter_label = $GLOBALS['TL_LANG']['MSC']['show_filter'];
 		parent::listAllMembers();
 		if ($this->memberlist_jumpTo)
 		{

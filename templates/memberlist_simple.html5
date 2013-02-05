@@ -4,7 +4,25 @@
 
 <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
 <?php endif; ?>
-
+<?php if (count($this->filters)): ?>
+<div class="list_search">
+<form action="<?php echo $this->action; ?>" method="get">
+<div class="formbody">
+<input type="hidden" name="order_by" value="<?php echo $this->order_by; ?>" />
+<input type="hidden" name="sort" value="<?php echo $this->sort; ?>" />
+<input type="hidden" name="per_page" value="<?php echo $this->per_page; ?>" />
+<input type="hidden" name="filter" value="<?php echo $this->filter; ?>" />
+<select name="filter" id="ctrl_filter" class="select">
+	<option value="-1"><?php echo $this->select_filter; ?></option>
+<?php foreach ($this->filters as $idx => $filter): ?>
+	<option <?php if (strlen($this->filter) && ($this->filter == $idx)) echo ' selected="selected"'; ?>value="<?php echo $filter[0]; ?>"><?php echo $filter[1]; ?></option>
+<?php endforeach; ?>	
+</select>
+<input type="submit" class="submit" value="<?php echo $this->filter_label; ?>" />
+</div>
+</form>
+</div>
+<?php endif; ?>
 <?php if ($this->show_searchfield): ?>
 <div class="list_search">
 <form action="<?php echo $this->action; ?>" method="get">
@@ -12,6 +30,7 @@
 <input type="hidden" name="order_by" value="<?php echo $this->order_by; ?>" />
 <input type="hidden" name="sort" value="<?php echo $this->sort; ?>" />
 <input type="hidden" name="per_page" value="<?php echo $this->per_page; ?>" />
+<input type="hidden" name="filter" value="<?php echo $this->filter; ?>" />
 <label for="ctrl_search" class="invisible"><?php echo $this->fields_label; ?></label>
 <select name="search" id="ctrl_search" class="select">
 <?php echo $this->search_fields; ?>
@@ -109,6 +128,7 @@
 <input type="hidden" name="order_by" value="<?php echo $this->order_by; ?>" />
 <input type="hidden" name="sort" value="<?php echo $this->sort; ?>" />
 <input type="hidden" name="search" value="<?php echo $this->search; ?>" />
+<input type="hidden" name="filter" value="<?php echo $this->filter; ?>" />
 <input type="hidden" name="for" value="<?php echo $this->for; ?>" />
 <label for="ctrl_per_page" class="invisible"><?php echo $this->per_page_label; ?></label>
 <select name="per_page" id="ctrl_per_page" class="select">

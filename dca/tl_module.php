@@ -130,11 +130,10 @@ class tl_module_memberextensions extends tl_module
 		}
 		return $members;
 	}
-
 }
 
 $GLOBALS['TL_DCA']['tl_module']['palettes']['memberpage']    = '{title_legend},name,headline,type;{config_legend},member_groups,member_template,show_member_name;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['memberlist']    = '{title_legend},name,headline,type;{config_legend},memberlist_groups,show_searchfield,show_member_name,perPage,memberlist_template,ml_sort,memberlist_where,memberlist_fields;{redirect_legend},memberlist_jumpTo,memberlist_showdetailscolumn,memberlist_detailscolumn;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['memberlist']    = '{title_legend},name,headline,type;{config_legend},memberlist_groups,show_searchfield,show_member_name,perPage,memberlist_template,ml_sort,memberlist_where,memberlist_filters,memberlist_fields;{redirect_legend},memberlist_jumpTo,memberlist_showdetailscolumn,memberlist_detailscolumn;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['singlemember']  = '{title_legend},name,headline,type;{config_legend},singlemember;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['registration']  = str_replace('reg_assignDir;', 'reg_assignDir;{agreement_legend},show_agreement;{groupselection_legend},allow_groupselection;', $GLOBALS['TL_DCA']['tl_module']['palettes']['registration']);
 $GLOBALS['TL_DCA']['tl_module']['palettes']['personalData']  = str_replace("{template_legend:hide},memberTpl", "{pageeditor_legend},page_editor", $GLOBALS['TL_DCA']['tl_module']['palettes']['personalData']);
@@ -311,6 +310,39 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['memberlist_where'] = array
 	'exclude'                 => true,
 	'inputType'               => 'text',
 	'eval'                    => array('preserveTags'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['memberlist_filters'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['memberlist_filters'],
+	'inputType'               => 'multitextWizard',
+//	'save_callback'           => array(array('tl_module_memberextensions', 'saveFilters')),
+//	'load_callback'           => array(array('tl_module_memberextensions', 'loadFilters')),
+	'eval'                    => 
+		array(
+			'mandatory' => false, 
+			'preserveTags'=>true,
+			'doNotSaveEmpty'=>true, 
+			'style'=>'width:100%;', 
+			'columns' => array
+			(
+				array
+				(
+					'label' => &$GLOBALS['TL_LANG']['tl_module']['memberlist_filter_name'],
+					'width' => '180px'
+				),
+				array
+				(
+					'label' => &$GLOBALS['TL_LANG']['tl_module']['memberlist_filter_description'],
+				)
+			),
+			'tl_class'=>'full',
+			'buttonTitles' => array(
+				'rnew' => $GLOBALS['TL_LANG']['tl_module']['buttontitle_editor_new'], 
+				'rcopy' => $GLOBALS['TL_LANG']['tl_module']['buttontitle_editor_copy'], 
+				'rdelete' => $GLOBALS['TL_LANG']['tl_module']['buttontitle_editor_delete']
+			)
+		)
 );
 
 ?>

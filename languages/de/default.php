@@ -17,5 +17,7 @@
  
 $GLOBALS['TL_LANG']['ERR']['agreement'] = "Bitte akzeptieren Sie die Nutzervereinbarung!";
 $GLOBALS['TL_LANG']['MSC']['reset'] = "Zurücksetzen";
+$GLOBALS['TL_LANG']['MSC']['show_filter'] = "Anzeigen";
+$GLOBALS['TL_LANG']['MSC']['select_filter'] = "Bitte auswählen...";
  
 ?>

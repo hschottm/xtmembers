@@ -43,6 +43,26 @@ class MemberHelper extends Backend
 		{
 			$strWhere .= ((strlen($strWhere) == 0) ? "" : " AND ") . $objMemberlist->memberlist_where;
 		}
+		if (strlen($this->Input->get('filter')))
+		{
+			$where_filters = array();
+			if (strlen($objMemberlist->memberlist_filters))
+			{
+				$c = 0;
+				$filters = deserialize($objMemberlist->memberlist_filters, true);
+				foreach ($filters as $filterarray)
+				{
+					if (is_array($filterarray) && count($filterarray) == 2 && strlen($filterarray[0]) && strlen($filterarray[1]))
+					{
+						if ($c == $this->Input->get('filter'))
+						{
+							$strWhere .= ((strlen($strWhere) == 0) ? "" : " AND ") . $filterarray[0];
+						}
+						$c++;
+					}
+				}
+			}
+		}
 		if (strlen($objMemberlist->show_searchfield == 2))
 		{
 			$this->Input->setGet('for', $objMemberlist->saved_for);

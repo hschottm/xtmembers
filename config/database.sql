@@ -32,7 +32,7 @@ CREATE TABLE `tl_member` (
   `title_extended` varchar(50) NOT NULL default '',
   `jobtitle` varchar(50) NOT NULL default '',
   `jobtitle_bc` varchar(50) NOT NULL default '',
-  `member_pages` blob NULL,
+  `member_pages` blob NULL
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -62,6 +62,7 @@ CREATE TABLE `tl_module` (
   `memberlist_showdetailscolumn` char(1) NOT NULL default '',
   `memberlist_detailscolumn` varchar(255) NOT NULL default 'username',
   `memberlist_where` varchar(255) NOT NULL default '',
+  `memberlist_filters` blob NULL,
   `singlemember` int(10) unsigned NOT NULL default '0',
   `show_agreement` char(1) NOT NULL default '',
   `allow_groupselection` char(1) NOT NULL default '',

@@ -62,6 +62,12 @@ $GLOBALS['TL_LANG']['tl_module']['memberlist_where']       = array('Condition', 
 $GLOBALS['TL_LANG']['tl_module']['search_field']['0'] = "No member search";
 $GLOBALS['TL_LANG']['tl_module']['search_field']['1'] = "Default member search";
 $GLOBALS['TL_LANG']['tl_module']['search_field']['2'] = "Extended member search";
+$GLOBALS['TL_LANG']['tl_module']['memberlist_filters']      = array('Filter conditions', 'You may enter a list of SQL WHERE conditions (e.g. <em>locked=1</em> or <em>lastname!="Miller"</em>) to filter the member list. Enter a name for each condition to make the condition selectable in the frontend.');
+$GLOBALS['TL_LANG']['tl_module']['memberlist_filter_name']      = 'Filter expression';
+$GLOBALS['TL_LANG']['tl_module']['memberlist_filter_description']      = 'Name';
+$GLOBALS['TL_LANG']['tl_module']['buttontitle_editor_copy']      = 'Copy';
+$GLOBALS['TL_LANG']['tl_module']['buttontitle_editor_new']      = 'New';
+$GLOBALS['TL_LANG']['tl_module']['buttontitle_editor_delete']      = 'Delete';
 
 /**
  * Legends
