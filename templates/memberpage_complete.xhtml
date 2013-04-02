@@ -14,7 +14,7 @@
 	</ul>
 <?php endif; ?>
 <?php if ((!array_key_exists("type", $this->activepage)) || (strcmp($this->activepage["type"], "memberpage") == 0)): ?>
-<?php if (strlen($this->avatar)): ?><img src="<?php echo $this->avatar; ?>" align="right" alt="<?php echo $this->firstname; ?> <?php echo $this->lastname; ?>" /><?php endif; ?>
+<?php if (strlen($this->avatar_path)): ?><img src="<?php echo $this->avatar_path; ?>" align="right" alt="<?php echo $this->firstname; ?> <?php echo $this->lastname; ?>" /><?php endif; ?>
 <div>
 <div class="name"><?php if (strlen($this->title)): ?><?php echo $this->title; ?> <?php endif; ?><?php echo $this->firstname; ?> <?php echo $this->lastname; ?></div>
 <?php if (strlen($this->department)): ?>

@@ -166,6 +166,8 @@ class ModuleMemberPage extends Module
 				try
 				{
 					if (in_array("avatar", $publicFields)) $objTemplate->avatar = $objMember->avatar;
+					$objFile = \FilesModel::findByPk($objMember->avatar);
+					if (in_array("avatar", $publicFields)) $objTemplate->avatar_path = $objFile->path;
 				}
 				catch (Exception $e)
 				{
