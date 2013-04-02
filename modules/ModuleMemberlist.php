@@ -16,6 +16,7 @@ class ModuleMemberlist extends \Contao\ModuleMemberlist
 	 * @var string
 	 */
 	protected $strTemplate = 'mod_memberlist_simple';
+	protected $currentMember = null;
 
 	/**
 	 * Display a wildcard in the back end
@@ -38,6 +39,7 @@ class ModuleMemberlist extends \Contao\ModuleMemberlist
 		$objMember = $this->Database->prepare("SELECT * FROM tl_member WHERE id=?")
 				->limit(1)
 				->execute($id);
+		$this->currentMember = $objMember;
 		if ($this->show_member_name)
 		{
 			global $objPage;
@@ -135,6 +137,7 @@ class ModuleMemberlist extends \Contao\ModuleMemberlist
 		}
 
 		$objMember = $objMemberStmt->execute($arrValues);
+		$this->currentMember = $objMember;
 
 		// Prepare URL
 		$strUrl = preg_replace('/\?.*$/', '', $this->Environment->request);
@@ -293,8 +296,26 @@ class ModuleMemberlist extends \Contao\ModuleMemberlist
 		// Array
 		if ($GLOBALS['TL_DCA']['tl_member']['fields'][$k]['inputType'] == 'avatar')
 		{
-			$data = Avatar::img($data);
-			return strlen($data) ? $data :  '-';
+			$maxlength  = $GLOBALS['TL_CONFIG']['avatar_maxsize'];
+			$extensions = $GLOBALS['TL_CONFIG']['avatar_filetype'];
+			$uploadFolder  = $GLOBALS['TL_CONFIG']['avatar_dir'];
+			$storeFile  = $uploadFolder != '' ? true : false;
+			$arrImage  = deserialize($GLOBALS['TL_CONFIG']['avatar_maxdims']);
+
+			$this->import('FrontendUser', 'User');
+
+			$objFile = \FilesModel::findByPk($data);
+			if ($this->currentMember)
+			{
+				$strAlt = $this->currentMember->firstname . " " . $this->currentMember->lastname;
+			}
+
+			if ( $objFile !== null )     
+			  return '<img src="' . TL_FILES_URL . \Image::get($objFile->path, $arrImage[0], $arrImage[1], $arrImage[2]) . '" width="' . $arrImage[0] . '" height="' . $arrImage[1] . '" alt="' . $strAlt . '" class="avatar">';
+			elseif ( $this->User->gender != '' )
+				return '<img src="' . TL_FILES_URL . \Image::get("system/modules/avatar/assets/" . $this->User->gender . ".png", $arrImage[0], $arrImage[1], $arrImage[2]) . '" width="' . $arrImage[0] . '" height="' . $arrImage[1] . '" alt="Avatar" class="avatar">';       
+			else
+				return  '<img src="' . TL_FILES_URL . \Image::get("system/modules/avatar/assets/male.png", $arrImage[0], $arrImage[1], $arrImage[2]) . '" width="' . $arrImage[0] . '" height="' . $arrImage[1] . '" alt="Avatar" class="avatar">';       
 		}
 		else
 		{
