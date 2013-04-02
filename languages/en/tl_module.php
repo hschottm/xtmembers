@@ -57,11 +57,14 @@ $GLOBALS['TL_LANG']['tl_module']['about_person']      = 'About';
 $GLOBALS['TL_LANG']['tl_module']['confirmDeletePage']      = 'Are you sure that you want to delete the active page?';
 $GLOBALS['TL_LANG']['tl_module']['pagetype']['essay']      = 'Text';
 $GLOBALS['TL_LANG']['tl_module']['memberlist_where']       = array('Condition', 'Here you can enter a condition to filter the results (e.g. <em>locked=1</em> or <em>lastname!="Miller"</em>).');
+$GLOBALS['TL_LANG']['tl_module']['registration_allow_groupselection']      = array('Allow group selection', 'Please choose if the applicant has to choose an existing role to apply it.');
+$GLOBALS['TL_LANG']['tl_module']['registration_groupselection_groups']      = array('Available groups', 'Please select the groups which should be available for selection during the registration process.');
 
 /**
  * Legends
  */
 $GLOBALS['TL_LANG']['tl_module']['pageeditor_legend']     = 'Page Editor';
 $GLOBALS['TL_LANG']['tl_module']['agreement_legend']     = 'User Agreement';
+$GLOBALS['TL_LANG']['tl_module']['groupselection_legend']     = 'Group Selection';
 
 ?>

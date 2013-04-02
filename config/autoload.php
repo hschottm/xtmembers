@@ -27,6 +27,7 @@ ClassLoader::addClasses(array
 (
 	// Classes
 	'Contao\TinyMCEPatcher'             => 'system/modules/xtmembers/classes/TinyMCEPatcher.php',
+	'Contao\CreatedMember'              => 'system/modules/xtmembers/classes/CreatedMember.php',
 
 	// Forms
 	'Contao\FormAgreement'              => 'system/modules/xtmembers/forms/FormAgreement.php',

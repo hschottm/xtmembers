@@ -64,5 +64,7 @@ $GLOBALS['TL_LANG']['tl_member']['dateAdded']['0'] = "Hinzugefügt am";
 $GLOBALS['TL_LANG']['tl_member']['dateAdded']['1'] = "Datum, an dem das Mitglied hinzugefügt wurde";
 $GLOBALS['TL_LANG']['tl_member']['work_legend'] = "Arbeitsbeschreibungen";
 $GLOBALS['TL_LANG']['tl_member']['customer_legend'] = "Kundenbeziehungen";
- 
+$GLOBALS['TL_LANG']['tl_member']['groupselection']['0'] = "Gruppe";
+$GLOBALS['TL_LANG']['tl_member']['groupselection']['1'] = "Bitte wählen Sie eine Nutzergruppe für sich aus.";
+
 ?>

@@ -264,6 +264,16 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['jobtitle_bc'] = array
 	'sql'                     => "varchar(50) NOT NULL default ''"
 );
 
+$GLOBALS['TL_DCA']['tl_member']['fields']['groupselection'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_member']['groupselection'],
+	'exclude'                 => true,
+	'inputType'               => 'select',
+	'options'                 => (strpos(get_class($this), 'ModuleRegistrationExtended') !== FALSE) ? $this->getGroupSelection() : array(),
+	'eval'                    => array('mandatory' => true, 'feGroup'=>'login', 'tl_class'=>'w50'),
+	'sql'                     => "char(1) NOT NULL default ''"
+);
+
 $GLOBALS['TL_DCA']['tl_member']['fields']['member_pages'] = array
 (
 	'sql'                     => "blob NULL"
