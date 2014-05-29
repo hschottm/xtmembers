@@ -8,7 +8,7 @@
 
 namespace Contao;
 
-class ModuleMemberDetails extends \ModuleMemberlist
+class ModuleMemberDetails extends \Xtmembers\ModuleMemberlist
 {
 
 	/**
@@ -29,7 +29,11 @@ class ModuleMemberDetails extends \ModuleMemberlist
 			$objTemplate->wildcard = '### MEMBER DETAILS ###';
 			return $objTemplate->parse();
 		}
-
+		
+		// The following two lines is just to prevent the parent class from not continuing
+		$this->ml_groups = 'a:2:{i:0;s:1:" ";i:1;s:1:" ";}';
+		$this->ml_fields = 'a:2:{i:0;s:1:" ";i:1;s:1:" ";}';
+		
 		return parent::generate();
 	}
 

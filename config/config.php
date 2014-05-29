@@ -52,7 +52,6 @@ $GLOBALS['FE_MOD']['user']['personalData'] = "ModulePersonalDataExtended";
  * Register hook functions
  */
 $GLOBALS['TL_HOOKS']['outputFrontendTemplate'][] = array('TinyMCEPatcher', 'outputFrontendTemplate');
-$GLOBALS['TL_HOOKS']['createNewUser'][] = array('CreatedMember', 'createNewUser');
 
 /**
  * Set the member URL parameter as url keyword

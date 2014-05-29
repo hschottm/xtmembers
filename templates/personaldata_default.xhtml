@@ -57,7 +57,7 @@
 <?php elseif (strcmp($this->activePageArr["type"], "essay") == 0): ?>
 <div class="tl_box">
 	<h3><?php echo $this->content; ?></h3>
-	<textarea id="ctrl_text" name="content" rows="25" cols="100"><?php echo $this->activePageArr["content"]; ?></textarea>
+	<textarea id="ctrl_text" name="content" class="textarea" rows="25" cols="100"><?php echo $this->activePageArr["content"]; ?></textarea>
 </div>
 <div class="submit_container">
 	<input type="submit" class="submit" name="saveContent" value="<?php echo $this->save; ?>" />

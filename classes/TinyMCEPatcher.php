@@ -30,15 +30,15 @@ class TinyMCEPatcher extends \Frontend
 			$tpl = new FrontendTemplate('tinyMCE');
 			$tpl->base = \Environment::get('base');
 			$tpl->brNewLine = $GLOBALS['TL_CONFIG']['pNewLine'] ? false : true;
-			$rtefields = array("ctrl_text");
+			$rtefields = array('ctrl_text');
 			foreach ($GLOBALS['TL_DCA']['tl_member']['fields'] as $k=>$v)
 			{
 				if (strcmp($v['eval']['rte'], 'tinyMCE') == 0)
 				{
-					array_push($rtefields, $k);
+					array_push($rtefields, 'ctrl_'.$k);
 				}
 			}
-			$tpl->rteFields = join($rtefields, ',');
+			$tpl->uploadPath = $GLOBALS['TL_CONFIG']['uploadPath'];
 			$tpl->language = 'en';
 
 			// Fallback to English if the user language is not supported

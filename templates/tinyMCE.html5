@@ -1,19 +1,14 @@
 <script src="<?php echo $this->base; ?>assets/tinymce/tiny_mce.js"></script>
 <script>
-tinyMCE_GZ.init({
-  plugins : "advimage,autosave,directionality,emotions,inlinepopups,paste,save,searchreplace,spellchecker,style,tabfocus,table,template,typolinks,xhtmlxtras",
-  themes : "advanced",
+tinyMCE.init({
+  theme : "advanced",
   languages : "<?php echo $this->language; ?>",
   disk_cache : false,
-  debug : false
-});
-</script>
-<script>
-tinyMCE.init({
-  mode : "exact",
+  debug : false,
+  mode : "specific_textareas",
   height : "300",
   language : "<?php echo $this->language; ?>",
-  elements : "<?php echo $this->rteFields; ?>",
+  editor_selector : "textarea",
   remove_linebreaks : false,
   force_hex_style_colors : true,
   fix_list_elements : true,
@@ -25,17 +20,14 @@ tinyMCE.init({
   cleanup_on_startup : true,
   save_enablewhendirty : true,
   save_on_tinymce_forms : true,
-  init_instance_callback : "TinyCallback.getScrollOffset",
   advimage_update_dimensions_onchange : false,
   external_image_list_url : "<?php echo TL_PATH; ?>/assets/tinymce/plugins/typolinks/typoimages.php",
   template_external_list_url : "<?php echo TL_PATH; ?>/assets/tinymce/plugins/typolinks/typotemplates.php",
-  plugins : "advimage,autosave,directionality,emotions,inlinepopups,paste,save,searchreplace,spellchecker,style,tabfocus,table,template,typolinks,xhtmlxtras",
-  spellchecker_languages : "<?php echo $this->getSpellcheckerString(); ?>",
+  plugins : "advimage,autosave,directionality,emotions,inlinepopups,paste,save,searchreplace,style,tabfocus,table,template,typolinks,xhtmlxtras",
   content_css : "<?php echo TL_PATH; ?>/system/themes/tinymce.css,<?php echo TL_PATH .'/'. $this->uploadPath; ?>/tinymce.css",
   event_elements : "a,div,h1,h2,h3,h4,h5,h6,img,p,span",
   extended_valid_elements : "q[cite|class|title],article,section,hgroup,figure,figcaption",
   tabfocus_elements : ":prev,:next",
-  theme : "advanced",
   theme_advanced_resizing : true,
   theme_advanced_resize_horizontal : false,
   theme_advanced_toolbar_location : "top",
