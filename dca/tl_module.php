@@ -180,7 +180,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['agreement_headline'] = array
 	'exclude'                 => true,
 	'inputType'               => 'text',
 	'eval'                    => array('maxlength'=>150, 'mandatory' => true, 'tl_class'=>'w50'),
-	'sql'                     => "varchar(150) NULL default ''"
+	'sql'                     => "varchar(150) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['member_groups'] = array
