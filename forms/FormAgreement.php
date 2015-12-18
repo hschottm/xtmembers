@@ -49,12 +49,45 @@ class FormAgreement extends \Widget
 			case 'mandatory':
 				$this->arrConfiguration['mandatory'] = $varValue ? true : false;
 				break;
+				case 'agreement_text':
+					$this->agreement_text = $varValue;
+					break;
+				case 'agreement_headline':
+					$this->agreement_headline = $varValue;
+					break;
+				case 'accept_agreement':
+					$this->accept_agreement = $varValue;
+					break;
+				case 'accept':
+					$this->accept = $varValue;
+					break;
 			default:
 				parent::__set($strKey, $varValue);
 				break;
 		}
 	}
 
+	public function __get($strKey)
+	{
+		switch ($strKey)
+		{
+			case 'agreement_text':
+				return $this->agreement_text;
+				break;
+			case 'agreement_headline':
+				return $this->agreement_headline;
+				break;
+			case 'accept_agreement':
+				return (($this->accept_agreement) ? true : false);
+				break;
+			case 'accept':
+				return $this->accept;
+				break;
+			default:
+				return parent::__get($strKey);
+				break;
+		}
+	}
 
 	/**
 	 * Validate input and set value
@@ -67,8 +100,18 @@ class FormAgreement extends \Widget
 		{
 			$this->addError($GLOBALS['TL_LANG']['ERR']['agreement']);
 		}
+
+		// Add class "error"
+		if (!$accept)
+		{
+			$this->class = 'error';
+		}
 	}
 
+	public function generateLabel()
+	{
+		return "";
+	}
 
 	/**
 	 * Generate the widget and return it as string
@@ -76,13 +119,16 @@ class FormAgreement extends \Widget
 	 */
 	public function generate()
 	{
-		return sprintf('<input type="checkbox" name="accept_agreement" value="1" id="ctrl_%s" class="agreement%s" %s /> <label for="ctrl_%s" class="agreement_check_text">%s</label>',
-						$this->strId,
-						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
-						$this->getAttributes(),
-						$this->strId,
-						$this->agreement_headline
-		);
+		return sprintf('<fieldset id="ctrl_agreement" class="checkbox_container"><span><input type="checkbox" name="%s" id="agreement_%s" class="checkbox" value="%s"%s%s%s <label id="lbl_%s" for="agreement_%s">%s</label></span></fieldset> ',
+								"accept_agreement",
+								$this->strId,
+								"1",
+								"",
+								$this->getAttributes(),
+								$this->strTagEnding,
+								$this->strId,
+								$this->strId,
+								$this->accept);
 	}
 
 

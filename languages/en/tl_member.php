@@ -50,11 +50,11 @@ $GLOBALS['TL_LANG']['tl_member']['building'] = array('Building', 'Please enter t
 $GLOBALS['TL_LANG']['tl_member']['joined'] = array('Joined', 'Please enter the date of joining.');
 $GLOBALS['TL_LANG']['tl_member']['resigned'] = array('Resigned', 'Please enter the date of resigning.');
 $GLOBALS['TL_LANG']['tl_member']['workscope'] = array('Workscope', 'Please enter a description of the workscope.');
-$GLOBALS['TL_LANG']['tl_member']['groupselection'] = array('Group', 'Please select a member group you want to join.');
 
 $GLOBALS['TL_LANG']['tl_member']['postaladdress'] = "Postal address";
 $GLOBALS['TL_LANG']['tl_member']['name'] = "Name";
 $GLOBALS['TL_LANG']['tl_member']['agreement'] = 'User agreement';
+$GLOBALS['TL_LANG']['tl_member']['accept_agreement'] = 'Accept';
 $GLOBALS['TL_LANG']['tl_member']['pageVisible'] = array('Page is visible', 'Please check if the page should be visible to everyone.');
 
 /**

@@ -58,13 +58,12 @@ $GLOBALS['TL_LANG']['tl_member']['workscope']['1'] = "Bitte geben Sie eine Besch
 $GLOBALS['TL_LANG']['tl_member']['postaladdress'] = "Postanschrift";
 $GLOBALS['TL_LANG']['tl_member']['name'] = "Name";
 $GLOBALS['TL_LANG']['tl_member']['agreement'] = "Nutzervereinbarung";
+$GLOBALS['TL_LANG']['tl_member']['accept_agreement'] = 'Akzeptieren';
 $GLOBALS['TL_LANG']['tl_member']['pageVisible']['0'] = "Die Seite ist sichtbar";
 $GLOBALS['TL_LANG']['tl_member']['pageVisible']['1'] = "Wählen Sie aus, ob diese Seite für alle sichtbar sein soll.";
 $GLOBALS['TL_LANG']['tl_member']['dateAdded']['0'] = "Hinzugefügt am";
 $GLOBALS['TL_LANG']['tl_member']['dateAdded']['1'] = "Datum, an dem das Mitglied hinzugefügt wurde";
 $GLOBALS['TL_LANG']['tl_member']['work_legend'] = "Arbeitsbeschreibungen";
 $GLOBALS['TL_LANG']['tl_member']['customer_legend'] = "Kundenbeziehungen";
-$GLOBALS['TL_LANG']['tl_member']['groupselection']['0'] = "Gruppe";
-$GLOBALS['TL_LANG']['tl_member']['groupselection']['1'] = "Bitte wählen Sie eine Nutzergruppe für sich aus.";
 
 ?>

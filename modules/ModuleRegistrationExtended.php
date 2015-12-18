@@ -42,66 +42,47 @@ class ModuleRegistrationExtended extends ModuleRegistration
 				$this->editable = explode(",", $fields . ",groupselection");
 			}
 		}
-
 		parent::compile();
 
-		$this->Template->agreementDetails = $GLOBALS['TL_LANG']['tl_member']['agreement'];
-	}
-
-	public function getGroupSelection()
-	{
-		$this->loadLanguageFile('tl_module');
-		$groups = array("" => $GLOBALS['TL_LANG']['tl_module']['reg_select_group']);
-		if (strlen($this->groupselection_groups))
+		if ($this->show_agreement)
 		{
-			$allowed_groups = deserialize($this->groupselection_groups, TRUE);
-			if (is_array($allowed_groups) && count($allowed_groups) > 0)
+			$arrAgreement = array
+			(
+				'id' => 'registration',
+				'label' => $GLOBALS['TL_LANG']['tl_member']['agreement'],
+				'type' => 'textarea',
+				'mandatory' => true,
+				'required' => true,
+				'accept_agreement' => $this->accept_agreement,
+				'agreement_text' => $this->agreement_text,
+				'agreement_headline' => $this->agreement_headline,
+				'accept' => $GLOBALS['TL_LANG']['tl_member']['accept_agreement'],
+				'tableless' => $this->tableless
+			);
+
+			/** @var \FormAgreement $strClass */
+			$strClass = $GLOBALS['TL_FFL']['agreement'];
+			// Fallback to default if the class is not defined
+			if (!class_exists($strClass))
 			{
-				$objGroup = $this->Database->prepare("SELECT * FROM tl_member_group WHERE id IN (" . implode(",", $allowed_groups) . ")")
-					->execute();
-				if ($objGroup->numRows >= 1)
-				{
-					while ($objGroup->next())
-					{
-						$groups[$objGroup->id] = $objGroup->name;
-					}
-				}
+				$strClass = 'FormAgreement';
 			}
-		}
-		return $groups;
-	}
 
-	/**
-	 * Send an admin notification e-mail
-	 * @param integer
-	 * @param array
-	 */
-	protected function sendAdminNotification($intId, $arrData)
-	{
-		$membergroups = deserialize($arrData['groups'], true);
-		if (array_key_exists('groups', $arrData) && is_array($membergroups))
-		{
-			$objGroup = $this->Database->prepare("SELECT * FROM tl_member_group WHERE id IN (" . implode(",", $membergroups) . ")")
-				->execute();
-
-			$newgroups = array();
-			while ($objGroup->next())
+			/** @var \FormAgreement $objAgreement */
+			$objAgreement = new $strClass($arrAgreement);
+			if (\Input::post('FORM_SUBMIT') == 'tl_registration')
 			{
-				array_push($newgroups, $objGroup->name . ' (ID ' . $objGroup->id . ')');
+				$objAgreement->validate();
 			}
-			$arrData['groups'] = serialize($newgroups);
+
+			$objAgreement->rowClass = 'row_'.$i . (($i == 0) ? ' row_first' : '') . ((($i % 2) == 0) ? ' even' : ' odd');
+			$strAgreement = $objAgreement->parse();
+
+			$this->Template->fields .= $strAgreement;
+			$arr = $this->Template->categories;
+			$arr[$this->agreement_headline] = array('agreement' => $strAgreement);
+			$this->Template->categories = $arr;
 		}
-		if (array_key_exists('groupselection', $arrData))
-		{
-			$arrGroup = $this->Database->prepare("SELECT * FROM tl_member_group WHERE id = ?")
-				->execute($arrData['groupselection'])->fetchAssoc();
-			$arrData['groupselection'] = $arrGroup['name'] . ' (ID ' . $arrData['groupselection'] . ')';
-		}
-		if (array_key_exists('dateAdded', $arrData))
-		{
-			$arrData['dateAdded'] = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $arrData['dateAdded']);
-		}
-		parent::sendAdminNotification($intId, $arrData);
 	}
 }
 

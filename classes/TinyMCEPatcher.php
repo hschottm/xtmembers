@@ -31,11 +31,14 @@ class TinyMCEPatcher extends \Frontend
 			$tpl->base = \Environment::get('base');
 			$tpl->brNewLine = $GLOBALS['TL_CONFIG']['pNewLine'] ? false : true;
 			$rtefields = array('ctrl_text');
-			foreach ($GLOBALS['TL_DCA']['tl_member']['fields'] as $k=>$v)
+			if (is_array($GLOBALS['TL_DCA']['tl_member']['fields']))
 			{
-				if (strcmp($v['eval']['rte'], 'tinyMCE') == 0)
+				foreach ($GLOBALS['TL_DCA']['tl_member']['fields'] as $k=>$v)
 				{
-					array_push($rtefields, 'ctrl_'.$k);
+					if (strcmp($v['eval']['rte'], 'tinyMCE') == 0)
+					{
+						array_push($rtefields, 'ctrl_'.$k);
+					}
 				}
 			}
 			$tpl->uploadPath = $GLOBALS['TL_CONFIG']['uploadPath'];

@@ -54,10 +54,5 @@ $GLOBALS['TL_LANG']['tl_module']['memberlist_where']['0'] = "Bedingung";
 $GLOBALS['TL_LANG']['tl_module']['memberlist_where']['1'] = "Hier können Sie eine Bedingung eingeben, um die Ergebnisse zu filtern (z.B. <em>locked=1</em> oder <em>lastname!=\"Müller\"</em>).";
 $GLOBALS['TL_LANG']['tl_module']['pageeditor_legend'] = "Seiteneditor";
 $GLOBALS['TL_LANG']['tl_module']['agreement_legend'] = "Nutzervereinbarung";
-$GLOBALS['TL_LANG']['tl_module']['registration_allow_groupselection']['0'] = "Gruppenauswahl ermöglichen";
-$GLOBALS['TL_LANG']['tl_module']['registration_allow_groupselection']['1'] = "Wählen Sie aus, ob bei der Registrierung eine vorhandene Mitgliedsgruppe ausgewählt werden soll.";
-$GLOBALS['TL_LANG']['tl_module']['registration_groupselection_groups']['0'] = "Verfügbare Gruppen";
-$GLOBALS['TL_LANG']['tl_module']['registration_groupselection_groups']['1'] = "Wählen Sie die Gruppen, die während der Registrierung zur Auswahl stehen sollen.";
-$GLOBALS['TL_LANG']['tl_module']['groupselection_legend'] = "Gruppenauswahl";
  
 ?>

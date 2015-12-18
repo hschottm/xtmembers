@@ -96,13 +96,10 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['memberpage']    = '{title_legend},n
 $GLOBALS['TL_DCA']['tl_module']['palettes']['memberlist']    = '{title_legend},name,headline,type;{config_legend},ml_groups,ml_fields,perPage;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['memberlist']    = '{title_legend},name,headline,type;{config_legend},ml_groups,show_searchfield,show_member_name,perPage,memberlist_template,memberlist_sort,memberlist_where,ml_fields;{redirect_legend},memberlist_jumpTo,memberlist_showdetailscolumn,memberlist_detailscolumn;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['singlemember']  = '{title_legend},name,headline,type;{config_legend},singlemember;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['registration']  = str_replace('reg_assignDir;', 'reg_assignDir;{agreement_legend},show_agreement;{groupselection_legend},allow_groupselection;', $GLOBALS['TL_DCA']['tl_module']['palettes']['registration']);
+$GLOBALS['TL_DCA']['tl_module']['palettes']['registration']  = str_replace('reg_assignDir;', 'reg_assignDir;{agreement_legend},show_agreement;', $GLOBALS['TL_DCA']['tl_module']['palettes']['registration']);
 $GLOBALS['TL_DCA']['tl_module']['palettes']['personalData']  = str_replace("{template_legend", "{pageeditor_legend},page_editor;{template_legend", $GLOBALS['TL_DCA']['tl_module']['palettes']['personalData']);
 
 $GLOBALS['TL_DCA']['tl_module']['palettes']['__selector__'][] = 'show_agreement';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['__selector__'][] = 'allow_groupselection';
-
-$GLOBALS['TL_DCA']['tl_module']['subpalettes']['allow_groupselection'] = 'groupselection_groups';
 
 $GLOBALS['TL_DCA']['tl_module']['subpalettes']['show_agreement'] = 'agreement_headline,agreement_text';
 
@@ -252,25 +249,6 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['memberlist_where'] = array
 	'inputType'               => 'text',
 	'eval'                    => array('preserveTags'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
 	'sql'                     => "varchar(255) NOT NULL default ''"
-);
-
-$GLOBALS['TL_DCA']['tl_module']['fields']['allow_groupselection'] = array
-(
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['registration_allow_groupselection'],
-	'exclude'                 => true,
-	'inputType'               => 'checkbox',
-	'eval'                    => array('submitOnChange'=>true),
-	'sql'                     => "char(1) NOT NULL default ''"
-);
-
-$GLOBALS['TL_DCA']['tl_module']['fields']['groupselection_groups'] = array
-(
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['registration_groupselection_groups'],
-	'exclude'                 => true,
-	'inputType'               => 'checkbox',
-	'foreignKey'              => 'tl_member_group.name',
-	'eval'                    => array('multiple'=>true),
-	'sql'                     => "blob NULL"
 );
 
 ?>

@@ -1,9 +1,18 @@
-<?php if (!$this->tableless): ?>
-  <tr class="<?php echo $this->rowClass; ?>">
-    <td class="col_0 col_first"><?php echo $this->generateLabel(); ?><?php if ($this->mandatory): ?><span class="mandatory">*</span><?php endif; ?></td>
-    <td class="col_1 col_last"><?php echo $this->generateWithError(); ?> <?php echo $this->generateAgreement(); ?></td>
-  </tr>
-<?php else: ?>
-  <?php echo $this->generateLabel(); ?> 
-  <?php echo $this->generateWithError(); ?> <?php echo $this->generateAgreement(); ?><br />
-<?php endif; ?>
+<?php $this->extend('form_row'); ?>
+
+<?php $this->block('label'); ?>
+  <?php if ($this->label): ?>
+    <label for="ctrl_<?= $this->id ?>"<?php if ($this->class): ?> class="<?= $this->class ?>"<?php endif; ?>>
+      <span class="invisible"><?= $this->mandatoryField ?></span> <?= $this->agreement_headline ?><span class="mandatory">*</span>
+    </label>
+  <?php endif; ?>
+<?php $this->endblock(); ?>
+
+<?php $this->block('field'); ?>
+  <?php if ($this->hasErrors()): ?>
+    <p class="error"><?= $this->getErrorAsString() ?></p>
+  <?php endif; ?>
+
+	<?php echo $this->generateAgreement(); ?>
+	<?php echo $this->generate(); ?>
+<?php $this->endblock(); ?>
