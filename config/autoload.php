@@ -47,7 +47,6 @@ ClassLoader::addClasses(array
 TemplateLoader::addFiles(array
 (
 	'form_agreement'               => 'system/modules/xtmembers/templates',
-	'member_grouped_useragreement' => 'system/modules/xtmembers/templates',
 	'memberpage_complete'          => 'system/modules/xtmembers/templates',
 	'mod_memberlist_birth'         => 'system/modules/xtmembers/templates',
 	'mod_memberlist_simple'        => 'system/modules/xtmembers/templates',
