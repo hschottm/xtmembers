@@ -23,13 +23,6 @@ class ModuleRegistrationExtended extends ModuleRegistration
 	 */
 	protected function compile()
 	{
-		if ($this->show_agreement)
-		{
-			$GLOBALS['TL_FFL'] += array('agreement' => 'FormAgreement');
-			$arr = $this->editable;
-			array_push($arr, "agreement");
-			$this->editable = $arr;
-		}
 		if ($this->allow_groupselection)
 		{
 			$fields = implode(",", $this->editable);
@@ -81,7 +74,23 @@ class ModuleRegistrationExtended extends ModuleRegistration
 			$this->Template->fields .= $strAgreement;
 			$arr = $this->Template->categories;
 			$arr[$this->agreement_headline] = array('agreement' => $strAgreement);
-			$this->Template->categories = $arr;
+
+			$newArray = array();
+			$inserted = false;
+			foreach ($this->Template->categories as $key => $value)
+			{
+				if (strlen($key) == 0 && is_array($value) && strcmp(array_keys($value)[0], 'captcha') == 0)
+				{
+					$newArray[$GLOBALS['TL_LANG']['tl_member']['agreement']] = array('agreement' => $strAgreement);
+					$inserted = true;
+				}
+				$newArray[$key] = $value;
+			}
+			if (!$inserted)
+			{
+				$newArray[] = array('agreement' => $strAgreement);
+			}
+			$this->Template->categories = $newArray;
 		}
 	}
 }
