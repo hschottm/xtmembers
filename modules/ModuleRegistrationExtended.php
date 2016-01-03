@@ -77,20 +77,23 @@ class ModuleRegistrationExtended extends ModuleRegistration
 
 			$newArray = array();
 			$inserted = false;
-			foreach ($this->Template->categories as $key => $value)
+			if (is_array($this->Template->categories))
 			{
-				if (strlen($key) == 0 && is_array($value) && strcmp(array_keys($value)[0], 'captcha') == 0)
+				foreach ($this->Template->categories as $key => $value)
 				{
-					$newArray[$GLOBALS['TL_LANG']['tl_member']['agreement']] = array('agreement' => $strAgreement);
-					$inserted = true;
+					if (strlen($key) == 0 && is_array($value) && strcmp(array_keys($value)[0], 'captcha') == 0)
+					{
+						$newArray[$GLOBALS['TL_LANG']['tl_member']['agreement']] = array('agreement' => $strAgreement);
+						$inserted = true;
+					}
+					$newArray[$key] = $value;
 				}
-				$newArray[$key] = $value;
+				if (!$inserted)
+				{
+					$newArray[] = array('agreement' => $strAgreement);
+				}
+				$this->Template->categories = $newArray;
 			}
-			if (!$inserted)
-			{
-				$newArray[] = array('agreement' => $strAgreement);
-			}
-			$this->Template->categories = $newArray;
 		}
 	}
 }
