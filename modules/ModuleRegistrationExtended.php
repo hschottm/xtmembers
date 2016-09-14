@@ -35,8 +35,11 @@ class ModuleRegistrationExtended extends ModuleRegistration
 				$this->editable = explode(",", $fields . ",groupselection");
 			}
 		}
-		parent::compile();
+    
+    // load the language file first, otherwise the agreement text is not shown
+    \System::loadLanguageFile('tl_member');
 
+    // process agreement field first
 		if ($this->show_agreement)
 		{
 			$arrAgreement = array
@@ -67,6 +70,14 @@ class ModuleRegistrationExtended extends ModuleRegistration
 			{
 				$objAgreement->validate();
 			}
+    }
+    
+    // process other form fields
+    parent::compile();
+    
+    // all fields are processed now, we can go on and add the agreement field to the template
+    if ($this->show_agreement)
+    {
 
 			$objAgreement->rowClass = 'row_'.$i . (($i == 0) ? ' row_first' : '') . ((($i % 2) == 0) ? ' even' : ' odd');
 			$strAgreement = $objAgreement->parse();
@@ -96,6 +107,21 @@ class ModuleRegistrationExtended extends ModuleRegistration
 			}
 		}
 	}
+
+  /**
+   * {@inheritDoc}
+   * Check if agreement is set and accepted
+   * 
+   */
+  protected function createNewUser($arrData)
+  {
+    if ($this->show_agreement && $this->Session->get('xtmembers_agreementNotAccepted'))
+    {
+      return;
+    }
+    
+    return parent::createNewUser($arrData);
+  }
 }
 
 ?>

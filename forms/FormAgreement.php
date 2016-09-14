@@ -88,7 +88,7 @@ class FormAgreement extends \Widget
 				break;
 		}
 	}
-
+  
 	/**
 	 * Validate input and set value
 	 */
@@ -96,16 +96,17 @@ class FormAgreement extends \Widget
 	{
 		$accept = deserialize($this->getPost('accept_agreement'));
 
+    // Add class "error" and set session flag to cancel user creation
 		if (!$accept)
 		{
+		  $this->Session->set('xtmembers_agreementNotAccepted', 1);
 			$this->addError($GLOBALS['TL_LANG']['ERR']['agreement']);
-		}
-
-		// Add class "error"
-		if (!$accept)
-		{
 			$this->class = 'error';
 		}
+    else {
+      // unset session flag
+      $this->Session->set('xtmembers_agreementNotAccepted', '');
+    }
 	}
 
 	public function generateLabel()
